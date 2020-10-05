@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace jeopardy_par_programering
 {
@@ -6,7 +7,6 @@ namespace jeopardy_par_programering
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
