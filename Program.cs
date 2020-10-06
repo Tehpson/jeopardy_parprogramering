@@ -20,6 +20,7 @@ namespace jeopardy_par_programering
                 //set up the data to match the season that was choosen
                 sucseed =  questions.setupData(season);
             }
+            Console.WriteLine(questions.filedata[0].value);
             
 
         }

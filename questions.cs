@@ -10,8 +10,10 @@ namespace jeopardy_par_programering
 {
     class questions
     {
+        public static List<data> filedata = new List<data>();
         public static bool setupData(string season)
         {
+            
             bool sucseed;
             //get the path to the rigth diractery
             string workingDirectory, projectDirectory, path;
@@ -21,7 +23,7 @@ namespace jeopardy_par_programering
 
             //--------takes jsut hte numbers in teh string that was inserted by player
             string seasonB = string.Empty;
-            int seasonNumber = 1;
+            int seasonNumber = -1; // -1 makes so if no numbers was enterd the program would just go to catch in later stages
             for (int i = 0; i < season.Length; i++)
             {
                 if (Char.IsDigit(season[i]))
@@ -40,10 +42,10 @@ namespace jeopardy_par_programering
                 path = Path.Combine(path, "season"+ seasonNumber + ".tsv");
 
                 string[] file = File.ReadAllLines(path);
-                List<data> filedata = new List<data>();
+                
                 string[] row;
 
-                for (int i = 0; i < file.Length; i++)
+                for (int i = 1; i < file.Length; i++)
                 {
                     row = file[i].Split("\t");
                     filedata.Add(new data
@@ -66,7 +68,9 @@ namespace jeopardy_par_programering
             return sucseed;
 
         }
-        private class data
+
+        //need to be public so filedata can be public. this feels stupid but cant find a another way.
+        public class data
         {
             public string value { get; set; }
             public string daily_double { get; set; }
