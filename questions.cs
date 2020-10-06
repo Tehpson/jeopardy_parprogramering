@@ -20,6 +20,7 @@ namespace jeopardy_par_programering
 
 
         public static List<data> filedata = new List<data>();
+        public static List<string> sixcat = new List<string>();
         public static bool setupData(string season)
         {
             
@@ -66,6 +67,11 @@ namespace jeopardy_par_programering
                         question = row[6]
                     });
                 }
+
+                //skulel kuna läga in hela funtionen här då vi bara kallar 
+                //på den en gång men vet inte hur runda två fungerar ifall 
+                //man ska ha 6st nya kateogirer därfölr jag gjorde en funktion för det
+                getSixCategories();
                 sucseed = true;
             }
             catch
@@ -73,28 +79,62 @@ namespace jeopardy_par_programering
                 Console.WriteLine("looks like we don't have the seasong you choose from");
                 sucseed = false;
             }
-
+            
             return sucseed;
 
         }
 
-        public static void getQuestonWithCatoegory()
+        public static void getSixCategories()
         {
-            List<string> categories = new List<string>();
+            Random rnd = new Random();
 
+            List<string> categories = new List<string>();
+            
+            //kollare igneom varje rad av datta vi har och tar kategorin
             for (int i = 0; i < filedata.Count; i++)
             {
                 string outcat = filedata[i].category;
-                for (int y = 0; y < categories.Count; y++)
+                //ifall vi itne har någon categori i våran lista av kategorier 
+                //så lägger vi till annars kolla vilka kalteogrier vi har
+                if (categories.Count == 0) 
                 {
-                    if (categories[y] != outcat)
+                    categories.Add(outcat);
+                }
+                else
+                {
+                    bool numCatExist = false;
+                    //kollar för varej katogori vi har ifall den stämmer överäns med den som fildata gav till oss.
+                    for (int y = 0; y < categories.Count; y++)
+                    {
+                        //ifall catekorin finns en ända gång säger vi att den finns
+                        if (categories[y].ToString() == outcat.ToString())
+                        {
+                            numCatExist = true;
+                        }
+                    }
+                    //ifall kategorin inte fanns lägger vi till den ananrs så går vi bara vidare
+                    if (!numCatExist)
                     {
                         categories.Add(outcat);
                     }
                 }
             }
 
+            // kollar så att vi får 6 katigorer  0 1 2 3 4 5 = 6st
+            //för att inte råka få två av samam kategori tar vi simpelt bara
+            //bort kategorin från listan av kategorir efter att ha lägt
+            //till den i listan med 6 katigorier
+            while (sixcat.Count < 5)
+            {
+                int RendomValue = rnd.Next(categories.Count);
+                sixcat.Add(categories[RendomValue]);
+                categories.RemoveAt(RendomValue);
+            }
 
+            for (int i = 0; i < sixcat.Count; i++)
+            {
+                Console.WriteLine(sixcat[i]);
+            }
         }
 
         //need to be public so filedata can be public. this feels stupid but cant find a another way.
