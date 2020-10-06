@@ -10,6 +10,15 @@ namespace jeopardy_par_programering
 {
     class questions
     {
+
+        /*  TO DO:
+         *  make rendom function
+         *  make get all where category is / take one of each value where cetegory is
+         *  store all active filedata/queston to make it easier to get the answer and give out points ang not care about inrelvant "qustions"
+         
+        */
+
+
         public static List<data> filedata = new List<data>();
         public static bool setupData(string season)
         {
@@ -61,7 +70,7 @@ namespace jeopardy_par_programering
             }
             catch
             {
-                Console.WriteLine("looks like we don't have the seasong you choos from");
+                Console.WriteLine("looks like we don't have the seasong you choose from");
                 sucseed = false;
             }
 
