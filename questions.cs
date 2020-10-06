@@ -78,6 +78,25 @@ namespace jeopardy_par_programering
 
         }
 
+        public static void getQuestonWithCatoegory()
+        {
+            List<string> categories = new List<string>();
+
+            for (int i = 0; i < filedata.Count; i++)
+            {
+                string outcat = filedata[i].category;
+                for (int y = 0; y < categories.Count; y++)
+                {
+                    if (categories[y] != outcat)
+                    {
+                        categories.Add(outcat);
+                    }
+                }
+            }
+
+
+        }
+
         //need to be public so filedata can be public. this feels stupid but cant find a another way.
         public class data
         {
