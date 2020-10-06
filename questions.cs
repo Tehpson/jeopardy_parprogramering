@@ -4,19 +4,22 @@ using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace jeopardy_par_programering
 {
     class questions
     {
-        public static void setupData(string season)
+        public static bool setupData(string season)
         {
+            bool sucseed;
+            //get the path to the rigth diractery
             string workingDirectory, projectDirectory, path;
             workingDirectory = Environment.CurrentDirectory;
             projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
             path = Path.Combine(projectDirectory, "jeopardy_clue_dataset");
 
-
+            //--------takes jsut hte numbers in teh string that was inserted by player
             string seasonB = string.Empty;
             int seasonNumber = 1;
             for (int i = 0; i < season.Length; i++)
@@ -27,27 +30,40 @@ namespace jeopardy_par_programering
 
             if (seasonB.Length > 0)
                 seasonNumber = int.Parse(seasonB);
+            //-------------------------
 
-            path = Path.Combine(projectDirectory, "jeopardy_clue_dataset");
-            path = Path.Combine(path, "season"+ seasonNumber + ".tsv");
 
-            string[] file = File.ReadAllLines(path);
-            List<data> filedata = new List<data>();
-            string[] row;
-
-            for (int i = 0; i < file.Length; i++)
+            //this is under try jsut to see if this work else the player have enterd an invalid season and have to redo it.
+            try
             {
-                row = file[i].Split("\n");
-                filedata.Add(new data
+                path = Path.Combine(projectDirectory, "jeopardy_clue_dataset");
+                path = Path.Combine(path, "season"+ seasonNumber + ".tsv");
+
+                string[] file = File.ReadAllLines(path);
+                List<data> filedata = new List<data>();
+                string[] row;
+
+                for (int i = 0; i < file.Length; i++)
                 {
-                    value = row[1],
-                    daily_double = row[2],
-                    category = row[3],
-                    answer = row[5],
-                    question = row[6]
-                });
+                    row = file[i].Split("\t");
+                    filedata.Add(new data
+                    {
+                        value = row[1],
+                        daily_double = row[2],
+                        category = row[3],
+                        answer = row[5],
+                        question = row[6]
+                    });
+                }
+                sucseed = true;
+            }
+            catch
+            {
+                Console.WriteLine("looks like we don't have the seasong you choos from");
+                sucseed = false;
             }
 
+            return sucseed;
 
         }
         private class data
