@@ -11,7 +11,7 @@ namespace jeopardy_par_programering
         {
 
             Console.WriteLine("Laoding...");
-            bool sucseed = questions.setupData();
+            bool sucseed = questions.setUpData();
             Console.Clear();
             if (!sucseed)
             {

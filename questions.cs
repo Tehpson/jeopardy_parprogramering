@@ -11,17 +11,10 @@ namespace jeopardy_par_programering
     class questions
     {
 
-        /*  TO DO:
-         *  make rendom function
-         *  make get all where category is / take one of each value where cetegory is
-         *  store all active dataList/queston to make it easier to get the answer and give out points ang not care about inrelvant "qustions"
-         
-        */
-
 
         public static List<data> dataList = new List<data>();
-        public static List<string> sixcat = new List<string>();
-        public static bool setupData()
+        public static List<question_set> question_list = new List<question_set>();
+        public static bool setUpData()
         {
             
             bool sucseed;
@@ -57,8 +50,24 @@ namespace jeopardy_par_programering
                     }
                 }
 
+                //get 6 rendom catigorys
+                List<string> sixcat = getSixCategories();
 
-                getSixCategories();
+                //for each catigory get 5 questions with the correct value and add to List<question_set>
+                foreach (string cat in sixcat)
+                {
+                    List<int> questionId = getIdForQuestion(cat, 1);
+                    question_list.Add(new question_set
+                    {
+                        category = cat,
+                        question1 = dataList[questionId[0]].question,
+                        question2 = dataList[questionId[1]].question,
+                        question3 = dataList[questionId[2]].question,
+                        question4 = dataList[questionId[3]].question,
+                        question5 = dataList[questionId[4]].question
+                    });
+                }
+
                 sucseed = true;
             }
             catch
@@ -70,14 +79,14 @@ namespace jeopardy_par_programering
         }
             
 
-        public static void getSixCategories()
+        public static List<string> getSixCategories()
         {
             Random rnd = new Random();
+            List<string> sixcat = new List<string>();
 
-           
-            
+
             //kollare igneom varje rad av datta vi har och tar kategorin
-         
+
 
             // kollar så att vi får 6 katigorer  0 1 2 3 4 5 = 6st
             //för att inte råka få två av samam kategori tar vi simpelt bara
@@ -114,6 +123,7 @@ namespace jeopardy_par_programering
             }
 
 
+            return sixcat;
             //for debug jsut write out the 6 cat
             /*
             for (int i = 0; i < sixcat.Count; i++)
@@ -122,11 +132,48 @@ namespace jeopardy_par_programering
             }*/
         }
 
+
+        public static List<int> getIdForQuestion(string catagory, int round)
+        {
+            List<int> id = new List<int>();
+            Random rnd = new Random();
+            List<int> validQuestions = new List<int>();
+
+            
+            if (round == 1)
+            {
+                while(id.Count < 4)
+                for (int i = 0; i < dataList.Count; i++)
+                {
+                    if (dataList[i].category == catagory && dataList[i].value == ((id.Count + 1) * 100).ToString())
+                    {
+                        validQuestions.Add(i);
+                    }
+                }
+                id.Add(validQuestions[rnd.Next(validQuestions.Count)]);
+            }
+
+            if (round == 2)
+            {
+                while (id.Count < 4)
+                    for (int i = 0; i < dataList.Count; i++)
+                    {
+                        if (dataList[i].category == catagory && dataList[i].value == ((id.Count + 1) * 200).ToString())
+                        {
+                            validQuestions.Add(i);
+                        }
+                    }
+                id.Add(validQuestions[rnd.Next(validQuestions.Count)]);
+            }
+
+            return id;
+        }
+
     }
 
 
 
-    //just use this to get a list with this valus in it
+    //to make a List<List<>> for Data_list
     class data
     {
         public string value { get; set; }
@@ -134,6 +181,17 @@ namespace jeopardy_par_programering
         public string category { get; set; }
         public string answer { get; set; }
         public string question { get; set; }
+    }
+
+    //to make a List<List<>> for question_list
+    class question_set
+    {
+        public string category { get; set; }
+        public string question1 { get; set; }
+        public string question2 { get; set; }
+        public string question3 { get; set; }
+        public string question4 { get; set; }
+        public string question5 { get; set; }
     }
 
 }
