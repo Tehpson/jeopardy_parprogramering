@@ -10,7 +10,32 @@ namespace jeopardy_par_programering
 {
     class questions
     {
-
+        /* 
+         
+        How to use:
+            In the beggning call SetUpData:
+                * this will add all date from all the sesons in to a data file that we can call
+                * get 6 rendom categories
+                * get 5 questions from each gatigory where question 1 is worth 100 and so on
+                
+            For round two: 
+                * call getSixCategories
+                * call getIdForQuestion(this would still need the catagrys but also that its the second round so it takes value from 600 isntad of 100)
+                * then insert function: (probably should find a way that this make it automatic)
+                        foreach (string cat in sixcat)
+                        {
+                            List<int> questionId = getIdForQuestion(cat, 2);
+                            question_list.Add(new question_set
+                            {
+                                category = cat,
+                                question1 = dataList[questionId[0]].question,
+                                question2 = dataList[questionId[1]].question,
+                                question3 = dataList[questionId[2]].question,
+                                question4 = dataList[questionId[3]].question,
+                                question5 = dataList[questionId[4]].question
+                            });
+                        }
+         */
 
         public static List<data> dataList = new List<data>();
         public static List<question_set> question_list = new List<question_set>();
