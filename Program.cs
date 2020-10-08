@@ -10,10 +10,10 @@ namespace jeopardy_par_programering
         static void Main(string[] args)
         {
             Console.Clear();
-            Console.WriteLine("-----------------Welcome to Jeopardy!-----------------");
-            Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine(" ");
-            Console.WriteLine("\t How many players?");
+            Console.WriteLine("\n\n-----------------Welcome to Jeopardy!-----------------");
+            Console.WriteLine("\n------------------------------------------------------");
+            Console.WriteLine("\n ");
+            Console.Write("\t\t How many players?");
             string playerNum = Console.ReadLine();
 
             Console.WriteLine("Loading...");
@@ -41,7 +41,8 @@ namespace jeopardy_par_programering
                     FourPlayers();
                     return true;
                 default:
-                    return true;
+                    Console.WriteLine("No players, program closes");
+                    return false;
             }
 
 
