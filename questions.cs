@@ -75,23 +75,7 @@ namespace jeopardy_par_programering
                     }
                 }
 
-                //get 6 rendom catigorys
-                List<string> sixcat = getSixCategories();
-
-                //for each catigory get 5 questions with the correct value and add to List<question_set>
-                foreach (string cat in sixcat)
-                {
-                    List<int> questionId = getIdForQuestion(cat, 1);
-                    question_list.Add(new question_set
-                    {
-                        category = cat,
-                        question1 = dataList[questionId[0]].question,
-                        question2 = dataList[questionId[1]].question,
-                        question3 = dataList[questionId[2]].question,
-                        question4 = dataList[questionId[3]].question,
-                        question5 = dataList[questionId[4]].question
-                    });
-                }
+                fillQuestionList(1);
 
                 sucseed = true;
             }
@@ -103,6 +87,28 @@ namespace jeopardy_par_programering
             return sucseed;
         }
             
+
+        public static void fillQuestionList(int round)
+        {
+            //get 6 rendom catigorys
+            question_list.Clear();
+            List<string> sixcat = getSixCategories();
+
+            //for each catigory get 5 questions with the correct value and add to List<question_set>
+            foreach (string cat in sixcat)
+            {
+                List<int> questionId = getIdForQuestion(cat, round);
+                question_list.Add(new question_set
+                {
+                    category = cat,
+                    question1 = dataList[questionId[0]].question,
+                    question2 = dataList[questionId[1]].question,
+                    question3 = dataList[questionId[2]].question,
+                    question4 = dataList[questionId[3]].question,
+                    question5 = dataList[questionId[4]].question
+                });
+            }
+        }
 
         public static List<string> getSixCategories()
         {
