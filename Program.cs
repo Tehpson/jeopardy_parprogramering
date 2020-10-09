@@ -15,10 +15,10 @@ namespace jeopardy_par_programering
             Console.Clear();
             if (!sucseed)
             {
-                Console.WriteLine("ERROR while eting up data...");
+                Console.WriteLine("ERROR while setting up data...");
             }
             
-
+           
 
 
             // draw up the game board. 
