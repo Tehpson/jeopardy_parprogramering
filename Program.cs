@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -16,9 +17,16 @@ namespace jeopardy_par_programering
             if (!sucseed)
             {
                 Console.WriteLine("ERROR while setting up data...");
+                Environment.Exit(0);
             }
-            
-           
+
+            //debug code
+            Console.WriteLine("Catigories");
+            foreach (var data in questions.question_list)
+            {
+                Console.WriteLine(data.category);
+            }
+
 
 
             // draw up the game board. 
