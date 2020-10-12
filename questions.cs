@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,33 +13,24 @@ namespace jeopardy_par_programering
     {
         /* 
          
+
+
         How to use:
             In the beggning call SetUpData:
                 * this will add all date from all the sesons in to a data file that we can call
                 * get 6 rendom categories
-                * get 5 questions from each gatigory where question 1 is worth 100 and so on
+                * get 5 questions from each catigorie where question 1 is worth 100 and so on
                 
             For round two: 
-                * call getSixCategories
-                * call getIdForQuestion(this would still need the catagrys but also that its the second round so it takes value from 600 isntad of 100)
-                * then insert function: (probably should find a way that this make it automatic)
-                        foreach (string cat in sixcat)
-                        {
-                            List<int> questionId = getIdForQuestion(cat, 2);
-                            question_list.Add(new question_set
-                            {
-                                category = cat,
-                                question1 = dataList[questionId[0]].question,
-                                question2 = dataList[questionId[1]].question,
-                                question3 = dataList[questionId[2]].question,
-                                question4 = dataList[questionId[3]].question,
-                                question5 = dataList[questionId[4]].question
-                            });
-                        }
+                * Call FilleQuestionList() 
+                * This will first clear all the questions in the List
+                * get 5 questions from each catigorie with value 600-1000
          */
 
         public static List<data> dataList = new List<data>();
         public static List<question_set> question_list = new List<question_set>();
+
+
         public static bool setUpData()
         {
             
@@ -63,7 +55,10 @@ namespace jeopardy_par_programering
 
                     for (int i = 1; i < tsv.Length; i++)
                     {
+                        // where there are a tab just split
                         row = tsv[i].Split("\t");
+
+                        // add it in the list 
                         dataList.Add(new data
                         {
                             value = row[1],
@@ -75,23 +70,7 @@ namespace jeopardy_par_programering
                     }
                 }
 
-                //get 6 rendom catigorys
-                List<string> sixcat = getSixCategories();
-
-                //for each catigory get 5 questions with the correct value and add to List<question_set>
-                foreach (string cat in sixcat)
-                {
-                    List<int> questionId = getIdForQuestion(cat, 1);
-                    question_list.Add(new question_set
-                    {
-                        category = cat,
-                        question1 = dataList[questionId[0]].question,
-                        question2 = dataList[questionId[1]].question,
-                        question3 = dataList[questionId[2]].question,
-                        question4 = dataList[questionId[3]].question,
-                        question5 = dataList[questionId[4]].question
-                    });
-                }
+                fillQuestionList();
 
                 sucseed = true;
             }
@@ -103,6 +82,33 @@ namespace jeopardy_par_programering
             return sucseed;
         }
             
+
+        public static void fillQuestionList()
+        {
+            //get 6 rendom catigorys
+            question_list.Clear();
+            List<string> sixcat = getSixCategories();
+
+            //for each catigory get 5 questions with the correct value and add to List<question_set>
+            foreach (string cat in sixcat)
+            {
+                List<int> questionId = getIdForQuestion(cat);
+                question_list.Add(new question_set
+                {
+                    category = cat,
+                    // lägger till Id som vi kallar på senare med question.dataList[question.question_list[0].question1ID].*what you wantoutputed ex answer*
+                    question1ID = questionId[0],
+                    question2ID = questionId[1],
+                    question3ID = questionId[2],
+                    question4ID = questionId[3],
+                    question5ID = questionId[4]
+                });
+            }
+
+
+
+        }
+
 
         public static List<string> getSixCategories()
         {
@@ -144,52 +150,69 @@ namespace jeopardy_par_programering
                     }
                     
                 }
-                
+
+                //for debug jsut write out the 6 cat
+                /*
+                for (int i = 0; i < sixcat.Count; i++)
+                {
+                    Console.WriteLine(sixcat[i]);
+                }*/
+
             }
 
 
             return sixcat;
-            //for debug jsut write out the 6 cat
-            /*
-            for (int i = 0; i < sixcat.Count; i++)
-            {
-                Console.WriteLine(sixcat[i]);
-            }*/
+
         }
 
 
-        public static List<int> getIdForQuestion(string catagory, int round)
+        public static List<int> getIdForQuestion(string catagory)
         {
             List<int> id = new List<int>();
             Random rnd = new Random();
             List<int> validQuestions = new List<int>();
 
-            
-            if (round == 1)
+
+            Stopwatch stopwatch = new Stopwatch();
+
+            while (id.Count < 5)
             {
-                while(id.Count < 4)
-                for (int i = 0; i < dataList.Count; i++)
+                int i = 0;
+                stopwatch.Start();
+                foreach(var data in dataList)
                 {
-                    if (dataList[i].category == catagory && dataList[i].value == ((id.Count + 1) * 100).ToString())
+                    //If the time sence started looking thorw data is over 5 seconds and we already have atleast 
+                    //one qusetion just continue instead of kep searching like a timeout.
+                    if (stopwatch.Elapsed.Seconds > 5 && validQuestions.Count > 1) break;
+                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100).ToString()|| data.value == (((id.Count + 1) * 100) + 500).ToString()))
                     {
+                        // add i where i becmes the id for each row fo data
                         validQuestions.Add(i);
+                    }
+                    i++;
+                }
+                stopwatch.Reset();
+
+                //there do exist data where to value is 0 in the dataset...
+                if(validQuestions.Count == 0)
+                {
+                    foreach (var data in dataList)
+                    {
+                        if (data.category == catagory && data.value == "0")
+                        {
+                            // add i where i becmes the id for each row fo data
+                            validQuestions.Add(i);
+                        }
+                        i++;
                     }
                 }
                 id.Add(validQuestions[rnd.Next(validQuestions.Count)]);
+                validQuestions.Clear();
             }
+                    
+            
 
-            if (round == 2)
-            {
-                while (id.Count < 4)
-                    for (int i = 0; i < dataList.Count; i++)
-                    {
-                        if (dataList[i].category == catagory && dataList[i].value == ((id.Count + 1) * 200).ToString())
-                        {
-                            validQuestions.Add(i);
-                        }
-                    }
-                id.Add(validQuestions[rnd.Next(validQuestions.Count)]);
-            }
+
 
             return id;
         }
@@ -212,11 +235,11 @@ namespace jeopardy_par_programering
     class question_set
     {
         public string category { get; set; }
-        public string question1 { get; set; }
-        public string question2 { get; set; }
-        public string question3 { get; set; }
-        public string question4 { get; set; }
-        public string question5 { get; set; }
+        public int question1ID { get; set; }
+        public int question2ID { get; set; }
+        public int question3ID { get; set; }
+        public int question4ID { get; set; }
+        public int question5ID { get; set; }
     }
 
 }
