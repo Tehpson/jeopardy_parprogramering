@@ -24,8 +24,7 @@ namespace jeopardy_par_programering
                 Console.WriteLine("ERROR while eating up data...");
             }
 
-            //Ska vi köra typ en sån här switch som hoppar in i antalet spelare? där antalet spelare som
-            //har en egen method som kallar på dem andra programmen baserat på antalet spelare?
+            
             switch (playerNum)
             {
                 case "1":
@@ -36,9 +35,6 @@ namespace jeopardy_par_programering
                     return true;
                 case "3":
                     ThreePlayers();
-                    return true;
-                case "4":
-                    FourPlayers();
                     return true;
                 default:
                     Console.WriteLine("No players, program closes");
