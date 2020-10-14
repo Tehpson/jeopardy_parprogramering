@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace jeopardy_par_programering
-{
-    class game
-    {
-        //here do we but all the functions that make the game work like caclutating scores and so on.
+//namespace jeopardy_par_programering
+//{
+//    class game
+//    {
+//        //here do we but all the functions that make the game work like caclutating scores and so on.
 
         /*      TODO:
          *      make score funtioction
@@ -32,14 +32,13 @@ namespace jeopardy_par_programering
             return player1.Points.CompareTo(player2.Points, player3.Points);
         }*/
 
-        //most Lay outside the class game coz it is a class of its own
-        public class Player
-        {
-            public string Name { get; set; }
-            public int Points { get; set; }
-        }
+//    //most Lay outside the class game coz it is a class of its own
+//    public class Player
+//    {
+//        public string Name { get; set; }
+//        public int Points { get; set; }
+//    }
 
-    }
-}
+//}
 
 

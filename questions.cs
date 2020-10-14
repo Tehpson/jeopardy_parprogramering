@@ -61,8 +61,7 @@ namespace jeopardy_par_programering
                         // add it in the list 
                         dataList.Add(new data
                         {
-                            value = row[1],
-                            round = int.Parse(row[0]),
+                            value = int.Parse(row[1]),
                             daily_double = row[2],
                             category = row[3],
                             answer = row[5],
@@ -97,7 +96,9 @@ namespace jeopardy_par_programering
                 question_list.Add(new question_set
                 {
                     category = cat,
-                    // lägger till Id som vi kallar på senare med question.dataList[question.question_list[0].question1ID].*what you wantoutputed ex answer*
+                    //this will outbout question with value of either round 1 and two so we will have to look if the value is 600 or 100 and so 
+                    //an and then if it is +600 den jsut subtract 500 from it 
+                    // add Id that we call using question.dataList[question.question_list[0].question1ID].*what you wantoutputed ex answer*
                     // Ex question.dataList[question.question_list[0].question2ID].Value  -- this will output the vlue of the second question in the first cat
                     question1ID = questionId[0],
                     question2ID = questionId[1],
@@ -106,7 +107,6 @@ namespace jeopardy_par_programering
                     question5ID = questionId[4]
                 });
             }
-
 
 
         }
@@ -125,19 +125,9 @@ namespace jeopardy_par_programering
             //för att inte råka få två av samam kategori tar vi simpelt bara
             //bort kategorin från listan av kategorir efter att ha lägt
             //till den i listan med 6 katigorier
-            while (sixcat.Count < 5)
+            while (sixcat.Count < 6)
             {
-
-                bool validQuestion = false;
-                while (!validQuestion)
-                {
-
-                    RendomValue = rnd.Next(dataList.Count);
-                    if(dataList[RendomValue].round == round)
-                    {
-                        validQuestion = true;
-                    }
-                }
+                RendomValue = rnd.Next(dataList.Count);
                 //if there is no katigoris already then just add it else se if teh rendom cat already exist
                 if (sixcat.Count == 0)
                 {
@@ -187,6 +177,7 @@ namespace jeopardy_par_programering
 
             Stopwatch stopwatch = new Stopwatch();
 
+            //while we have less then 5 questions 
             while (id.Count < 5)
             {
                 int i = 0;
@@ -196,7 +187,7 @@ namespace jeopardy_par_programering
                     //If the time sence started looking thorw data is over 5 seconds and we already have atleast 
                     //one qusetion just continue instead of kep searching like a timeout.
                     if (stopwatch.Elapsed.Seconds > 5 && validQuestions.Count > 1) break;
-                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100).ToString()|| data.value == (((id.Count + 1) * 100) + 500).ToString()))
+                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100)|| data.value == (((id.Count + 1) * 100) + 500)))
                     {
                         // add i where i becmes the id for each row fo data
                         validQuestions.Add(i);
@@ -210,7 +201,7 @@ namespace jeopardy_par_programering
                 {
                     foreach (var data in dataList)
                     {
-                        if (data.category == catagory && data.value == "0")
+                        if (data.category == catagory && data.value == 0)
                         {
                             // add i where i becmes the id for each row fo data
                             validQuestions.Add(i);
@@ -221,11 +212,6 @@ namespace jeopardy_par_programering
                 id.Add(validQuestions[rnd.Next(validQuestions.Count)]);
                 validQuestions.Clear();
             }
-                    
-            
-
-
-
             return id;
         }
 
@@ -236,8 +222,7 @@ namespace jeopardy_par_programering
     //to make a List<List<>> for Data_list
     class data
     {
-        public string value { get; set; }
-        public int round { get; set; }
+        public int value { get; set; }
         public string daily_double { get; set; }
         public string category { get; set; }
         public string answer { get; set; }
