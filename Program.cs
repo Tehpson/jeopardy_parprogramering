@@ -10,26 +10,35 @@ namespace jeopardy_par_programering
     {
         static void Main(string[] args)
         {
+
+            //This have to be the highest in teh file coz we want to do this before evrything else.
+            Console.WriteLine("Loading...");
+            bool sucseed = questions.setUpData();
             Console.Clear();
+            if (!sucseed)
+            {
+                Console.WriteLine("ERROR while setting up data...\n please Restart");
+                Environment.Exit(0);
+            }
+
+            //I am thinking will be doing aslittle code as posible in this file 
             Console.WriteLine("\n\n-----------------Welcome to Jeopardy!-----------------");
             Console.WriteLine("\n------------------------------------------------------");
             Console.WriteLine("\n ");
             Console.Write("\t\t How many players?");
             string playerNum = Console.ReadLine();
 
-            Console.WriteLine("Loading...");
-            bool sucseed = questions.setupData();
-            Console.Clear();
-            if (!sucseed)
-            {
-                Console.WriteLine("ERROR while setting up data...");
-                Environment.Exit(0);
-            }
+            //My thougth
 
-            
+            //I saty we have to say the players/team must be between like 2 and 5, ould be are to play alone.
+            //instead of making one function per player make one function that loop for that many player
+            //game.setupPlayer(playerNum);
             switch (playerNum)
             {
                 case "1":
+                    // jag säger at min måste välja mellan 2 och 5 spelare typ för svårt att spela det själv
+                    //istället för att göra en funtion där anta lspelare så gör enfuntion som du sickar med hur många spelare
+                    //som sedan loppar så många gånger och även frågar vad lagnamnet ska vara
                     OnePlayer();
                     return true;
                 case "2":

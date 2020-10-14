@@ -22,7 +22,7 @@ namespace jeopardy_par_programering
                 * get 5 questions from each catigorie where question 1 is worth 100 and so on
                 
             For round two: 
-                * Call FilleQuestionList() 
+                * Call FilleQuestionList(2)
                 * This will first clear all the questions in the List
                 * get 5 questions from each catigorie with value 600-1000
          */
@@ -62,6 +62,7 @@ namespace jeopardy_par_programering
                         dataList.Add(new data
                         {
                             value = row[1],
+                            round = int.Parse(row[0]),
                             daily_double = row[2],
                             category = row[3],
                             answer = row[5],
@@ -70,7 +71,7 @@ namespace jeopardy_par_programering
                     }
                 }
 
-                fillQuestionList();
+                fillQuestionList(1);
 
                 sucseed = true;
             }
@@ -83,11 +84,11 @@ namespace jeopardy_par_programering
         }
             
 
-        public static void fillQuestionList()
+        public static void fillQuestionList(int round)
         {
             //get 6 rendom catigorys
             question_list.Clear();
-            List<string> sixcat = getSixCategories();
+            List<string> sixcat = getSixCategories(round);
 
             //for each catigory get 5 questions with the correct value and add to List<question_set>
             foreach (string cat in sixcat)
@@ -97,6 +98,7 @@ namespace jeopardy_par_programering
                 {
                     category = cat,
                     // lägger till Id som vi kallar på senare med question.dataList[question.question_list[0].question1ID].*what you wantoutputed ex answer*
+                    // Ex question.dataList[question.question_list[0].question2ID].Value  -- this will output the vlue of the second question in the first cat
                     question1ID = questionId[0],
                     question2ID = questionId[1],
                     question3ID = questionId[2],
@@ -110,12 +112,12 @@ namespace jeopardy_par_programering
         }
 
 
-        public static List<string> getSixCategories()
+        public static List<string> getSixCategories(int round)
         {
             Random rnd = new Random();
             List<string> sixcat = new List<string>();
 
-
+            int RendomValue = 0;
             //kollare igneom varje rad av datta vi har och tar kategorin
 
 
@@ -125,7 +127,17 @@ namespace jeopardy_par_programering
             //till den i listan med 6 katigorier
             while (sixcat.Count < 5)
             {
-                int RendomValue = rnd.Next(dataList.Count);
+
+                bool validQuestion = false;
+                while (!validQuestion)
+                {
+
+                    RendomValue = rnd.Next(dataList.Count);
+                    if(dataList[RendomValue].round == round)
+                    {
+                        validQuestion = true;
+                    }
+                }
                 //if there is no katigoris already then just add it else se if teh rendom cat already exist
                 if (sixcat.Count == 0)
                 {
@@ -225,6 +237,7 @@ namespace jeopardy_par_programering
     class data
     {
         public string value { get; set; }
+        public int round { get; set; }
         public string daily_double { get; set; }
         public string category { get; set; }
         public string answer { get; set; }
