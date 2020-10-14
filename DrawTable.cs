@@ -41,6 +41,7 @@ namespace jeopardy_par_programering
 
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 5, Console.WindowHeight - 10); Console.WriteLine(">  Start");
 
+                        _ = Console.ReadKey().Key;
                         break;
 
 
@@ -71,7 +72,7 @@ namespace jeopardy_par_programering
 
 
                     case Menu.PlayerName:
-                        for (int i = 0; i < activePlayerCount; i++)
+                        for (int i = 0; i < activePlayerCount ; i++)
                         {
                             bool nameDone = false;
                             string name = "";
@@ -151,7 +152,6 @@ namespace jeopardy_par_programering
 
 
                 //logic
-                var input = Console.ReadKey().Key;
 
                 switch (state)
                 {
@@ -160,16 +160,18 @@ namespace jeopardy_par_programering
                         break;
 
                     case Menu.PlayerCount:
-                        switch (input)
+
+                        var inputplyaer = Console.ReadKey().Key;
+                        switch (inputplyaer)
                         {
                             case ConsoleKey.RightArrow:
-                                if (activePlayerCount < 3)
+                                if (activePlayerCount < 4)
                                 {
                                     activePlayerCount++;
                                 }
                                 break;
                             case ConsoleKey.LeftArrow:
-                                if (activePlayerCount > 1)
+                                if (activePlayerCount > 2)
                                 {
                                     activePlayerCount--;
                                 }
@@ -181,8 +183,14 @@ namespace jeopardy_par_programering
                         }
                         break;
 
+                    case Menu.PlayerName:
+                        state = Menu.board;
+                        break;
+
                     case Menu.board:
-                        switch (input)
+
+                        var inputboard = Console.ReadKey().Key;
+                        switch (inputboard)
                         {
                             case ConsoleKey.UpArrow:
                                 if (activebord[1] > 1)
@@ -212,8 +220,6 @@ namespace jeopardy_par_programering
                                 break;
                         }
                         break;
-
-
                 }
             }
         }
