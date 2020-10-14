@@ -14,6 +14,7 @@ namespace jeopardy_par_programering
             playrname,
             board,
         }
+        private static int[] activebord = { 0, 1 };
         public static void draw()
         {
             
@@ -46,7 +47,7 @@ namespace jeopardy_par_programering
                             int catColum = (Console.WindowWidth / 7 * (i + 1)) - (questions.question_list[i].category.Length / 2);
                             int pointcolum = (Console.WindowWidth / 7 * (i + 1) - 2);
                             Console.SetCursorPosition(catColum, Console.WindowHeight / 7);
-                            Console.WriteLine(questions.question_list[i].category);
+                            Console.Write(questions.question_list[i].category);
 
                             for (int y = 1; y < 6; y++)
                             {
@@ -68,20 +69,58 @@ namespace jeopardy_par_programering
                                         value = questions.dataList[questions.question_list[i].question5ID].value;
                                         break;
                                 }
-                                Console.SetCursorPosition(pointcolum, Console.WindowHeight / 7 * (y+1));
                                 if (value > 500) value = value - 500;
-                                Console.WriteLine(value);
+                                if (activebord[0] == i && activebord[1] == y)
+                                {
+                                    Console.SetCursorPosition(pointcolum-4, Console.WindowHeight / 7 * (y + 1));
+                                    Console.Write(">  ");
+                                }
+                                Console.SetCursorPosition(pointcolum, Console.WindowHeight / 7 * (y + 1));
+                                Console.Write(value);
                             }
 
                         }
                         break;
                 }
 
-                
-                Console.ReadKey();
+
+
+                var input = Console.ReadKey().Key;
                 if(state == Menu.Start)
                 {
                     state = Menu.board;
+                }
+                if (state == Menu.board)
+                {
+                    switch (input)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (activebord[1] > 1)
+                            {
+                                activebord[1] = activebord[1] - 1;
+                            }
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (activebord[1] < 5)
+                            {
+                                activebord[1] = activebord[1] + 1;
+                            }
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            if (activebord[0] > 0)
+                            {
+                                activebord[0] = activebord[0] - 1;
+                            }
+                            break;
+                        case ConsoleKey.RightArrow:
+                            if (activebord[0] < 5)
+                            {
+                                activebord[0] = activebord[0] + 1;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
