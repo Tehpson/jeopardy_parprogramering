@@ -42,9 +42,37 @@ namespace jeopardy_par_programering
                     case Menu.board:
                         for (int i = 0; i < 6; i++)
                         {
-                            Console.SetCursorPosition((Console.WindowWidth / 7 * i+1) - (questions.question_list[i].category.Length / 2), Console.WindowHeight / 6);
-                            //Console.SetCursorPosition(Console.WindowWidth / 2, 5);
+                            int value = 0;
+                            int catColum = (Console.WindowWidth / 7 * (i + 1)) - (questions.question_list[i].category.Length / 2);
+                            int pointcolum = (Console.WindowWidth / 7 * (i + 1) - 2);
+                            Console.SetCursorPosition(catColum, Console.WindowHeight / 7);
                             Console.WriteLine(questions.question_list[i].category);
+
+                            for (int y = 1; y < 6; y++)
+                            {
+                                switch (y)
+                                {
+                                    case 1:
+                                        value = questions.dataList[questions.question_list[i].question1ID].value;
+                                        break;
+                                    case 2:
+                                        value = questions.dataList[questions.question_list[i].question2ID].value;
+                                        break;
+                                    case 3:
+                                        value = questions.dataList[questions.question_list[i].question3ID].value;
+                                        break;
+                                    case 4:
+                                        value = questions.dataList[questions.question_list[i].question4ID].value;
+                                        break;
+                                    case 5:
+                                        value = questions.dataList[questions.question_list[i].question5ID].value;
+                                        break;
+                                }
+                                Console.SetCursorPosition(pointcolum, Console.WindowHeight / 7 * (y+1));
+                                if (value > 500) value = value - 500;
+                                Console.WriteLine(value);
+                            }
+
                         }
                         break;
                 }

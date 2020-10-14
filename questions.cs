@@ -61,7 +61,7 @@ namespace jeopardy_par_programering
                         // add it in the list 
                         dataList.Add(new data
                         {
-                            value = row[1],
+                            value = int.Parse(row[1]),
                             daily_double = row[2],
                             category = row[3],
                             answer = row[5],
@@ -187,7 +187,7 @@ namespace jeopardy_par_programering
                     //If the time sence started looking thorw data is over 5 seconds and we already have atleast 
                     //one qusetion just continue instead of kep searching like a timeout.
                     if (stopwatch.Elapsed.Seconds > 5 && validQuestions.Count > 1) break;
-                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100).ToString()|| data.value == (((id.Count + 1) * 100) + 500).ToString()))
+                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100)|| data.value == (((id.Count + 1) * 100) + 500)))
                     {
                         // add i where i becmes the id for each row fo data
                         validQuestions.Add(i);
@@ -201,7 +201,7 @@ namespace jeopardy_par_programering
                 {
                     foreach (var data in dataList)
                     {
-                        if (data.category == catagory && data.value == "0")
+                        if (data.category == catagory && data.value == 0)
                         {
                             // add i where i becmes the id for each row fo data
                             validQuestions.Add(i);
@@ -222,7 +222,7 @@ namespace jeopardy_par_programering
     //to make a List<List<>> for Data_list
     class data
     {
-        public string value { get; set; }
+        public int value { get; set; }
         public string daily_double { get; set; }
         public string category { get; set; }
         public string answer { get; set; }
