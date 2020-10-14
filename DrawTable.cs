@@ -63,7 +63,7 @@ namespace jeopardy_par_programering
                                 Console.SetCursorPosition(numberColum - 4, Console.WindowHeight - 10);
                                 Console.Write(" >  ");
                             }
-                            Console.SetCursorPosition(numberColum, Console.WindowHeight - 10); Console.WriteLine(i +1);
+                            Console.SetCursorPosition(numberColum, Console.WindowHeight - 10); Console.WriteLine(i);
                         }
 
                         break;
@@ -77,7 +77,7 @@ namespace jeopardy_par_programering
                             string name = "";
                             while (!nameDone)
                             {
-
+                                Console.Clear();
                                 Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 5); Console.Write(@"  ______       _                    _                         _   _                      ");
                                 Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 6); Console.Write(@" |  ____|     | |                  | |                       | \ | |                     ");
                                 Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 7); Console.Write(@" | |__   _ __ | |_ ___ _ __   _ __ | | __ _ _   _  ___ _ __  |  \| | __ _ _ __ ___   ___ ");
@@ -93,7 +93,7 @@ namespace jeopardy_par_programering
                                 var localinput = Console.ReadKey();
                                 if (Char.IsLetter(localinput.KeyChar))
                                 {
-                                    name = name + localinput;
+                                    name = name + localinput.Key;
                                 }else if (localinput.Key == ConsoleKey.Enter)
                                 {
                                     nameDone = true;
@@ -153,67 +153,67 @@ namespace jeopardy_par_programering
                 //logic
                 var input = Console.ReadKey().Key;
 
-                
-                if(state == Menu.Start)
+                switch (state)
                 {
-                    state = Menu.PlayerCount;
-                }
+                    case Menu.Start:
+                        state = Menu.PlayerCount;
+                        break;
+
+                    case Menu.PlayerCount:
+                        switch (input)
+                        {
+                            case ConsoleKey.RightArrow:
+                                if (activePlayerCount < 3)
+                                {
+                                    activePlayerCount++;
+                                }
+                                break;
+                            case ConsoleKey.LeftArrow:
+                                if (activePlayerCount > 1)
+                                {
+                                    activePlayerCount--;
+                                }
+                                break;
+
+                            case ConsoleKey.Enter:
+                                state = Menu.PlayerName;
+                                break;
+                        }
+                        break;
+
+                    case Menu.board:
+                        switch (input)
+                        {
+                            case ConsoleKey.UpArrow:
+                                if (activebord[1] > 1)
+                                {
+                                    activebord[1] = activebord[1] - 1;
+                                }
+                                break;
+                            case ConsoleKey.DownArrow:
+                                if (activebord[1] < 5)
+                                {
+                                    activebord[1] = activebord[1] + 1;
+                                }
+                                break;
+                            case ConsoleKey.LeftArrow:
+                                if (activebord[0] > 0)
+                                {
+                                    activebord[0] = activebord[0] - 1;
+                                }
+                                break;
+                            case ConsoleKey.RightArrow:
+                                if (activebord[0] < 5)
+                                {
+                                    activebord[0] = activebord[0] + 1;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
 
 
-                if (state == Menu.PlayerCount)
-                {
-                    switch (input)
-                    {
-                        case ConsoleKey.RightArrow:
-                            if(activePlayerCount < 3)
-                            {
-                                activePlayerCount++;
-                            }
-                            break;
-                        case ConsoleKey.LeftArrow:
-                            if (activePlayerCount > 1)
-                            {
-                                activePlayerCount--;
-                            }
-                            break;
-
-                        case ConsoleKey.Enter:
-                            state = Menu.PlayerName;
-                            break;
-                    }
-                }
-
-                if (state == Menu.board)
-                {
-                    switch (input)
-                    {
-                        case ConsoleKey.UpArrow:
-                            if (activebord[1] > 1)
-                            {
-                                activebord[1] = activebord[1] - 1;
-                            }
-                            break;
-                        case ConsoleKey.DownArrow:
-                            if (activebord[1] < 5)
-                            {
-                                activebord[1] = activebord[1] + 1;
-                            }
-                            break;
-                        case ConsoleKey.LeftArrow:
-                            if (activebord[0] > 0)
-                            {
-                                activebord[0] = activebord[0] - 1;
-                            }
-                            break;
-                        case ConsoleKey.RightArrow:
-                            if (activebord[0] < 5)
-                            {
-                                activebord[0] = activebord[0] + 1;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
                 }
             }
         }
