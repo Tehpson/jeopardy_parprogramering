@@ -10,11 +10,13 @@ namespace jeopardy_par_programering
     {
         enum Menu
         {
-            Start,
-            playrname,
+            Start, 
+            PlayerCount,
+            PlayerName,
             board,
         }
         private static int[] activebord = { 0, 1 };
+        private static int activePlayerCount = 1;
         public static void draw()
         {
             
@@ -37,6 +39,31 @@ namespace jeopardy_par_programering
 
 
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 5, Console.WindowHeight - 10); Console.WriteLine(">  Start");
+
+                        break;
+
+
+                    case Menu.PlayerCount:
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 5); Console.Write(@"  _    _                                                     _                          ___  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 6); Console.Write(@" | |  | |                                                   | |                        |__ \ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 7); Console.Write(@" | |__| | _____      __  _ __ ___   __ _ _ __  _   _   _ __ | | __ _ _   _  ___ _ __ ___  ) |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 8); Console.Write(@" |  __  |/ _ \ \ /\ / / | '_ ` _ \ / _` | '_ \| | | | | '_ \| |/ _` | | | |/ _ \ '__/ __|/ / ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 9); Console.Write(@" | |  | | (_) \ V  V /  | | | | | | (_| | | | | |_| | | |_) | | (_| | |_| |  __/ |  \__ \_|  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 10); Console.Write(@" |_|  |_|\___/ \_/\_/   |_| |_| |_|\__,_|_| |_|\__, | | .__/|_|\__,_|\__, |\___|_|  |___(_)  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 11); Console.Write(@"                                                __/ | | |             __/ |                  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 12); Console.Write(@"                                               |___/  |_|            |___/                   ");
+
+                        for (int i = 1; i < 4;  i++)
+                        {
+
+                            int numberColum = (Console.WindowWidth / 4 * (i));
+                            if (activePlayerCount == i)
+                            {
+                                Console.SetCursorPosition(numberColum - 4, Console.WindowHeight - 10);
+                                Console.Write(" >  ");
+                            }
+                            Console.SetCursorPosition(numberColum, Console.WindowHeight - 10); Console.WriteLine(i +1);
+                        }
 
                         break;
 
@@ -73,7 +100,7 @@ namespace jeopardy_par_programering
                                 if (activebord[0] == i && activebord[1] == y)
                                 {
                                     Console.SetCursorPosition(pointcolum-4, Console.WindowHeight / 7 * (y + 1));
-                                    Console.Write(">  ");
+                                    Console.Write(" >  ");
                                 }
                                 Console.SetCursorPosition(pointcolum, Console.WindowHeight / 7 * (y + 1));
                                 Console.Write(value);
@@ -84,12 +111,33 @@ namespace jeopardy_par_programering
                 }
 
 
-
+                //logic
                 var input = Console.ReadKey().Key;
                 if(state == Menu.Start)
                 {
-                    state = Menu.board;
+                    state = Menu.PlayerCount;
                 }
+
+
+                if (state == Menu.PlayerCount)
+                {
+                    switch (input)
+                    {
+                        case ConsoleKey.RightArrow:
+                            if(activePlayerCount < 3)
+                            {
+                                activePlayerCount++;
+                            }
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            if (activePlayerCount > 1)
+                            {
+                                activePlayerCount--;
+                            }
+                            break;
+                    }
+                }
+
                 if (state == Menu.board)
                 {
                     switch (input)
