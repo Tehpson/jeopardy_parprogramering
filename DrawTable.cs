@@ -16,7 +16,8 @@ namespace jeopardy_par_programering
             board,
         }
         private static int[] activebord = { 0, 1 };
-        private static int activePlayerCount = 1;
+        private static int activePlayerCount = 2;
+        private static List<string> players = new List<string>();
         public static void draw()
         {
             
@@ -44,19 +45,19 @@ namespace jeopardy_par_programering
 
 
                     case Menu.PlayerCount:
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 5); Console.Write(@"  _    _                                                     _                          ___  ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 6); Console.Write(@" | |  | |                                                   | |                        |__ \ ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 7); Console.Write(@" | |__| | _____      __  _ __ ___   __ _ _ __  _   _   _ __ | | __ _ _   _  ___ _ __ ___  ) |");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 8); Console.Write(@" |  __  |/ _ \ \ /\ / / | '_ ` _ \ / _` | '_ \| | | | | '_ \| |/ _` | | | |/ _ \ '__/ __|/ / ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 9); Console.Write(@" | |  | | (_) \ V  V /  | | | | | | (_| | | | | |_| | | |_) | | (_| | |_| |  __/ |  \__ \_|  ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 10); Console.Write(@" |_|  |_|\___/ \_/\_/   |_| |_| |_|\__,_|_| |_|\__, | | .__/|_|\__,_|\__, |\___|_|  |___(_)  ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 11); Console.Write(@"                                                __/ | | |             __/ |                  ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 41, 12); Console.Write(@"                                               |___/  |_|            |___/                   ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 5); Console.Write(@"  _    _                                                     _                          ___  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 6); Console.Write(@" | |  | |                                                   | |                        |__ \ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 7); Console.Write(@" | |__| | _____      __  _ __ ___   __ _ _ __  _   _   _ __ | | __ _ _   _  ___ _ __ ___  ) |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 8); Console.Write(@" |  __  |/ _ \ \ /\ / / | '_ ` _ \ / _` | '_ \| | | | | '_ \| |/ _` | | | |/ _ \ '__/ __|/ / ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 9); Console.Write(@" | |  | | (_) \ V  V /  | | | | | | (_| | | | | |_| | | |_) | | (_| | |_| |  __/ |  \__ \_|  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 10); Console.Write(@" |_|  |_|\___/ \_/\_/   |_| |_| |_|\__,_|_| |_|\__, | | .__/|_|\__,_|\__, |\___|_|  |___(_)  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 11); Console.Write(@"                                                __/ | | |             __/ |                  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 46, 12); Console.Write(@"                                               |___/  |_|            |___/                   ");
 
-                        for (int i = 1; i < 4;  i++)
+                        for (int i = 2; i < 5;  i++)
                         {
 
-                            int numberColum = (Console.WindowWidth / 4 * (i));
+                            int numberColum = (Console.WindowWidth / 4 * (i-1));
                             if (activePlayerCount == i)
                             {
                                 Console.SetCursorPosition(numberColum - 4, Console.WindowHeight - 10);
@@ -66,6 +67,44 @@ namespace jeopardy_par_programering
                         }
 
                         break;
+
+
+
+                    case Menu.PlayerName:
+                        for (int i = 0; i < activePlayerCount; i++)
+                        {
+                            bool nameDone = false;
+                            string name = "";
+                            while (!nameDone)
+                            {
+
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 5); Console.Write(@"  ______       _                    _                         _   _                      ");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 6); Console.Write(@" |  ____|     | |                  | |                       | \ | |                     ");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 7); Console.Write(@" | |__   _ __ | |_ ___ _ __   _ __ | | __ _ _   _  ___ _ __  |  \| | __ _ _ __ ___   ___ ");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 8); Console.Write(@" |  __| | '_ \| __/ _ \ '__| | '_ \| |/ _` | | | |/ _ \ '__| | . ` |/ _` | '_ ` _ \ / _ \");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 9); Console.Write(@" | |____| | | | ||  __/ |    | |_) | | (_| | |_| |  __/ |    | |\  | (_| | | | | | |  __/");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 10); Console.Write(@" |______|_| |_|\__\___|_|    | .__/|_|\__,_|\__, |\___|_|    |_| \_|\__,_|_| |_| |_|\___|");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 11); Console.Write(@"                             | |             __/ |                                       ");
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - 45, 12); Console.Write(@"                             |_|            |___/                                        ");
+
+                                
+                                Console.SetCursorPosition((Console.WindowWidth / 2) - name.Length / 2, Console.WindowHeight - 10); Console.WriteLine(name);
+
+                                var localinput = Console.ReadKey();
+                                if (Char.IsLetter(localinput.KeyChar))
+                                {
+                                    name = name + localinput;
+                                }else if (localinput.Key == ConsoleKey.Enter)
+                                {
+                                    nameDone = true;
+                                    players.Add(name);
+                                }
+                            }
+                        }
+                        break;
+
+
+
 
                     case Menu.board:
                         for (int i = 0; i < 6; i++)
@@ -113,6 +152,8 @@ namespace jeopardy_par_programering
 
                 //logic
                 var input = Console.ReadKey().Key;
+
+                
                 if(state == Menu.Start)
                 {
                     state = Menu.PlayerCount;
@@ -134,6 +175,10 @@ namespace jeopardy_par_programering
                             {
                                 activePlayerCount--;
                             }
+                            break;
+
+                        case ConsoleKey.Enter:
+                            state = Menu.PlayerName;
                             break;
                     }
                 }
