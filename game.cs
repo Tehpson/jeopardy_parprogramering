@@ -13,7 +13,7 @@ namespace jeopardy_par_programering
          *      make a function that enters all the users (thinking that ppl can enter players name in the beggingin) kinda like List<data>
          *      ...
          */
-        public void PlayerList();
+        public static void PlayerList()
         {
             List<Player> playerList = new List<Player>()
             {
@@ -27,7 +27,7 @@ namespace jeopardy_par_programering
         {
             return player1.Points.CompareTo(player2.Points, player3.Points);
         }
-        
+
         public class Player
         {
             public string Name { get; set; }
@@ -36,12 +36,10 @@ namespace jeopardy_par_programering
 
 
         playerList.add(new player{name = "Jesper", Points = 1000});
-        }
-    }
-
-
-
     }
 }
-    }
+
+
+
+
 
