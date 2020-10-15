@@ -4,19 +4,18 @@ using System.Text;
 
 namespace jeopardy_par_programering
 {
-    class game
+    class gameLogic
     {
+        public static List<Player> players = new List<Player>();
 
-
-        //        //here do we but all the functions that make the game work like caclutating scores and so on.
 
         /*      TODO:
-         *      make score funtioction
-         *      make a function that enters all the users (thinking that ppl can enter players name in the beggingin) kinda like List<data>
-         *      ...
+         *      Function that add teh players to a playerlist
+         *      Funtion that add or subtract score from the player
          */
 
         //Börjat jobba med score function,
+        //idk tror inte vi beöhver detta då jag sickar till dig spelare och value och ifall det var rätt eller fel.  gör istället en void function som tar in stirng Name, int Value, bool answer
         string[,] categories_points = new string[5, 5]
         {
             {" $100  ", "  $100  ", "  $100  ", "  $100  ", "  $100  " },
@@ -28,6 +27,9 @@ namespace jeopardy_par_programering
         string[] categories = new string[] { };//get categories from tsv file
         int category = 0;
 
+
+        // här gör att du ahr imot en lista med namn istället, och sedan för List.count loppar du till du har laggt in alla 
+        //gör ändast void functioner då ci inte kommer behlva få tillbaka någon data när vi kllar på dem. (public static void addPlayers(List<string> playername))
         public static List<string> PlayerName(string name)
         {
             // List<string> PlayerList = new List<string>();
@@ -49,7 +51,8 @@ namespace jeopardy_par_programering
         }
         //Tänker en function som man kan kalla på för att se och jämföra poängen mellan de tävlande
         //Typ som detta?
-        public static int ComparePlayers(Player Name)
+        // humm kan vara bra i slutet där man kollar vem som van. 
+        public static int ComparePlayers(Player Name) { return 0; }
 
         
        /* public static List<data> ComparePlayers(Player listName, Player player2, Player player3, Player player4)
@@ -62,6 +65,8 @@ namespace jeopardy_par_programering
         //put platerlist as a public static list outide of teh function så we can ccses it evrywhere and 
         //use playerlist.add({}) instead to add content to the list
     }
+
+
     public class Player
     {
         public string Name { get; set; }
