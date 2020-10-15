@@ -4,7 +4,7 @@ using System.Text;
 
 namespace jeopardy_par_programering
 {
-    class game
+    class gameLogic
     {
 
 
