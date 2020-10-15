@@ -19,13 +19,14 @@ namespace jeopardy_par_programering
             PlayerName,
             Board,
             Answer,
-            Qiestion,
+            Question,
         }
         //where cureses is
         private static int[] activebord = { 0, 1 };
         private static int activePlayerCount = 2;
         private static int activeAnswerCuror = 0;
         private static int qestionID;
+        private static string fastestPlayerName = "";
         //lsit of the playername that we send to game.cs
         private static List<string> players = new List<string>();
         public static void draw()
@@ -134,20 +135,20 @@ namespace jeopardy_par_programering
                         {
                             Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is P");
                         }
-                        if (gameLogic.players.Count == 2)
+                        else if (gameLogic.players.Count == 3)
                         {
                             Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is V     " + gameLogic.players[2].Name + " button is P     ");
                         }
-                        if (gameLogic.players.Count == 4)
+                        else if (gameLogic.players.Count == 4)
                         {
                             Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z" + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
                         }
                         //for each cat
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i < 6; i++)
                         {
                             int value = 0;
-                            int catColum = (Console.WindowWidth /8 * (i + 1)) - (questions.question_list[i].category.Length / 2);
-                            int pointcolum = (Console.WindowWidth / 8 * (i + 1) - 2);
+                            int catColum = (Console.WindowWidth /7 * (i + 1)) - (questions.question_list[i].category.Length / 2);
+                            int pointcolum = (Console.WindowWidth / 7 * (i + 1) - 2);
                             Console.SetCursorPosition(catColum, Console.WindowHeight / 7);
                             Console.Write(questions.question_list[i].category);
                             //for each row of question
@@ -190,37 +191,43 @@ namespace jeopardy_par_programering
                         int currentPlayer = 1;
                         foreach (var player in gameLogic.players)
                         {
-                            Console.SetCursorPosition(Console.WindowWidth / (gameLogic.players.Count + 1) * currentPlayer - player.Name.Length / 2, Console.WindowWidth / 8 * 7);
+                            Console.SetCursorPosition(Console.WindowWidth / (gameLogic.players.Count + 1) * currentPlayer - player.Name.Length / 2, (Console.WindowHeight / 8) * 7);
                             Console.Write(player.Name);
-                            Console.SetCursorPosition(Console.WindowWidth / (gameLogic.players.Count + 1) * currentPlayer - 2, Console.WindowWidth / 8 * 7 + 1);
+                            Console.SetCursorPosition(Console.WindowWidth / (gameLogic.players.Count + 1) * currentPlayer - 2, (Console.WindowHeight / 8) * 7 + 1);
                             Console.Write(player.Points);
                             currentPlayer++;
                         }
 
                         break;
 
-                    case Stage.Qiestion:
+                    case Stage.Question:
 
                         //write out what buton to play.
                         if (gameLogic.players.Count == 2)
                         {
                             Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is P");
                         }
-                        if (gameLogic.players.Count == 2)
+                        else if (gameLogic.players.Count == 3)
                         {
                             Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is V     " + gameLogic.players[2].Name + " button is P     ");
                         }
-                        if (gameLogic.players.Count == 4)
+                        else if (gameLogic.players.Count == 4)
                         {
                             Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z" + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
                         }
+
+
                         bool questionsActive = true;
-                        string question = questions.dataList[qestionID].question;
+                        //we have to use the answer here co< its jepoardy
+                        string question = questions.dataList[qestionID].answer;
+
+                        //uses this wile so if they press the wrongbutton we still coinue unitl somone presssed the rigth one.
                         while (questionsActive)
                         {
                             Console.SetCursorPosition((Console.WindowWidth / 2) - (question.Length / 2), Console.WindowHeight / 2);
                             Console.Write(question);
-                            Console.SetCursorPosition(0, 0);
+                            //to set teh cursour out fo the way
+                            Console.SetCursorPosition(0, Console.WindowHeight-1);
 
                             var fastestPlayInput = Console.ReadKey().Key;
                             //Q spoelare 1, Z spelare 2, M spelare 3, P sepaler 4
@@ -231,15 +238,15 @@ namespace jeopardy_par_programering
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[0].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[0].Name);
-                                        questionsActive = false;
-                                        Thread.Sleep(5000);
+                                        fastestPlayerName = gameLogic.players[0].Name;
+                                         questionsActive = false;
                                     }
                                     if (fastestPlayInput == ConsoleKey.P)
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[1].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[1].Name);
+                                        fastestPlayerName = gameLogic.players[1].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     break;
                                 case 3:
@@ -247,22 +254,22 @@ namespace jeopardy_par_programering
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[0].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[0].Name);
+                                        fastestPlayerName = gameLogic.players[0].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.V)
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[1].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[1].Name);
+                                        fastestPlayerName = gameLogic.players[1].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.P)
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[2].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[2].Name);
+                                        fastestPlayerName = gameLogic.players[2].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     break;
                                 case 4:
@@ -270,40 +277,42 @@ namespace jeopardy_par_programering
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[0].Name.Length +14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " +gameLogic.players[0].Name);
+                                        fastestPlayerName = gameLogic.players[0].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.Z)
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[1].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[1].Name);
+                                        fastestPlayerName = gameLogic.players[1].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.M)
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[2].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[2].Name);
+                                        fastestPlayerName = gameLogic.players[2].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.P)
                                     {
                                         Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[3].Name.Length+14) / 2), Console.WindowHeight - 10);
                                         Console.Write("Fastes Player: " + gameLogic.players[3].Name);
+                                        fastestPlayerName = gameLogic.players[3].Name;
                                         questionsActive = false;
-                                        Thread.Sleep(5000);
                                     }
                                     break;
                             }
-                            _ = Console.ReadKey();
                         }
-                        state = Stage.Answer;
+                        //make sure that even if palyers press a lot of buttons after the first one it dosnt skip evrything
+                        Console.WriteLine("press Enter to Continue");
+                        _ = Console.ReadLine();
                         break;
 
-
+                        //juast dispaly the answer 
                     case Stage.Answer:
-                        string answer = questions.dataList[qestionID].answer;
+                        //we have to use the question here czo its jepoardy
+                        string answer = questions.dataList[qestionID].question;
                         Console.SetCursorPosition((Console.WindowWidth / 2) - (answer.Length / 2), Console.WindowHeight / 2);
                         Console.Write(answer);
                         Console.SetCursorPosition(Console.WindowWidth / 4 -10, Console.WindowHeight - 10);
@@ -323,7 +332,8 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition(Console.WindowWidth / 4 * 3 -1, Console.WindowHeight - 10);
                         Console.Write("NO");
 
-
+                        //to get teh cursour out of teh way
+                        Console.SetCursorPosition(0, Console.WindowHeight);
                         break;
 
                 }
@@ -368,6 +378,7 @@ namespace jeopardy_par_programering
                         //if all playername have been put in go to the game board
                     case Stage.PlayerName:
                         state = Stage.Board;
+                        gameLogic.addPlayers(players);
                         break;
 
 
@@ -423,7 +434,7 @@ namespace jeopardy_par_programering
                                         qestionID = questions.question_list[cat].question5ID;
                                         break;
                                 }
-                                state = Stage.Qiestion;
+                                state = Stage.Question;
                                     break;
 
                             default:
@@ -431,6 +442,11 @@ namespace jeopardy_par_programering
                         }
 
                         break;
+
+                    case Stage.Question:
+                        state = Stage.Answer;
+                        break;
+
 
                     case Stage.Answer:
                         var answerInput = Console.ReadKey().Key;
@@ -450,6 +466,12 @@ namespace jeopardy_par_programering
                                 break;
                             case ConsoleKey.Enter:
                                 //sene to game.cs with playername and value of the question
+                                bool wasAnswerRigth = false;
+                                if (activeAnswerCuror == 0)
+                                    wasAnswerRigth = false; 
+                                else wasAnswerRigth = true;
+
+                                gameLogic.addScore(fastestPlayerName, questions.dataList[qestionID].value, wasAnswerRigth);
                                 state = Stage.Board;
                                 break;
                         }

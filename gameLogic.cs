@@ -61,14 +61,20 @@ namespace jeopardy_par_programering
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
 
-        
-       /* public static List<data> ComparePlayers(Player listName, Player player2, Player player3, Player player4)
+        //bara added denna du löser vad den gör
+        internal static void addScore(string fastestPlayerName, int value, bool wasAnswerRigth)
         {
-            while(playerList.Count < 5)
-            foreach (var data in playerList)
-                Console.WriteLine(player.Name + ": " + player.Points + " points!");
-            return ;
-        }*/
+            
+        }
+
+
+        /* public static List<data> ComparePlayers(Player listName, Player player2, Player player3, Player player4)
+         {
+             while(playerList.Count < 5)
+             foreach (var data in playerList)
+                 Console.WriteLine(player.Name + ": " + player.Points + " points!");
+             return ;
+         }*/
         //put platerlist as a public static list outide of teh function så we can ccses it evrywhere and 
         //use playerlist.add({}) instead to add content to the list
     }
