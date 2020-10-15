@@ -229,15 +229,15 @@ namespace jeopardy_par_programering
                                 case 2:
                                     if(fastestPlayInput == ConsoleKey.Q)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[0].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[0]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[0].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[0].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.P)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[1].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[1]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[1].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[1].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
@@ -245,22 +245,22 @@ namespace jeopardy_par_programering
                                 case 3:
                                     if (fastestPlayInput == ConsoleKey.Q)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[0].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[0]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[0].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[0].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.V)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[1].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[1]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[1].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[1].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.P)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[2].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[2]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[2].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[2].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
@@ -268,29 +268,29 @@ namespace jeopardy_par_programering
                                 case 4:
                                     if (fastestPlayInput == ConsoleKey.Q)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[0].Length +14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " +players[0]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[0].Name.Length +14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " +gameLogic.players[0].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.Z)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[1].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[1]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[1].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[1].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.M)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[2].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[2]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[2].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[2].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
                                     if (fastestPlayInput == ConsoleKey.P)
                                     {
-                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((players[3].Length+14) / 2), Console.WindowHeight - 10);
-                                        Console.Write("Fastes Player: " + players[3]);
+                                        Console.SetCursorPosition(Console.WindowWidth / 2 - ((gameLogic.players[3].Name.Length+14) / 2), Console.WindowHeight - 10);
+                                        Console.Write("Fastes Player: " + gameLogic.players[3].Name);
                                         questionsActive = false;
                                         Thread.Sleep(5000);
                                     }
