@@ -34,7 +34,8 @@ namespace jeopardy_par_programering
         {
             foreach (var player in playername)
             {
-                playername.Add({ name = player, points = 500});
+                //sorry var jag som fukcade upp 
+                players.Add(new Player { Name = player, Points = 0 });
             }
         }
 
