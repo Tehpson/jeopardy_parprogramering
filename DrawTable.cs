@@ -129,12 +129,25 @@ namespace jeopardy_par_programering
 
                         //draw the game board
                     case Stage.Board:
+                        //write out what buton to play.
+                        if (gameLogic.players.Count == 2)
+                        {
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is P");
+                        }
+                        if (gameLogic.players.Count == 2)
+                        {
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is V     " + gameLogic.players[2].Name + " button is P     ");
+                        }
+                        if (gameLogic.players.Count == 4)
+                        {
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z" + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
+                        }
                         //for each cat
-                        for (int i = 0; i < 6; i++)
+                        for (int i = 0; i < 5; i++)
                         {
                             int value = 0;
-                            int catColum = (Console.WindowWidth / 7 * (i + 1)) - (questions.question_list[i].category.Length / 2);
-                            int pointcolum = (Console.WindowWidth / 7 * (i + 1) - 2);
+                            int catColum = (Console.WindowWidth /8 * (i + 1)) - (questions.question_list[i].category.Length / 2);
+                            int pointcolum = (Console.WindowWidth / 8 * (i + 1) - 2);
                             Console.SetCursorPosition(catColum, Console.WindowHeight / 7);
                             Console.Write(questions.question_list[i].category);
                             //for each row of question
@@ -163,17 +176,44 @@ namespace jeopardy_par_programering
                                 //if curser is on teh current question add > before it
                                 if (activebord[0] == i && activebord[1] == y)
                                 {
-                                    Console.SetCursorPosition(pointcolum-4, Console.WindowHeight / 7 * (y + 1));
+                                    Console.SetCursorPosition(pointcolum-4, Console.WindowHeight / 8 * (y + 1));
                                     Console.Write(" >  ");
                                 }
-                                Console.SetCursorPosition(pointcolum, Console.WindowHeight / 7 * (y + 1));
+                                Console.SetCursorPosition(pointcolum, Console.WindowHeight / 8 * (y + 1));
                                 Console.Write(value);
+
                             }
 
                         }
+
+                        //write out the player with theier scor at the end of the screen
+                        int currentPlayer = 1;
+                        foreach (var player in gameLogic.players)
+                        {
+                            Console.SetCursorPosition(Console.WindowWidth / (gameLogic.players.Count + 1) * currentPlayer - player.Name.Length / 2, Console.WindowWidth / 8 * 7);
+                            Console.Write(player.Name);
+                            Console.SetCursorPosition(Console.WindowWidth / (gameLogic.players.Count + 1) * currentPlayer - 2, Console.WindowWidth / 8 * 7 + 1);
+                            Console.Write(player.Points);
+                            currentPlayer++;
+                        }
+
                         break;
 
                     case Stage.Qiestion:
+
+                        //write out what buton to play.
+                        if (gameLogic.players.Count == 2)
+                        {
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is P");
+                        }
+                        if (gameLogic.players.Count == 2)
+                        {
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is V     " + gameLogic.players[2].Name + " button is P     ");
+                        }
+                        if (gameLogic.players.Count == 4)
+                        {
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z" + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
+                        }
                         bool questionsActive = true;
                         string question = questions.dataList[qestionID].question;
                         while (questionsActive)

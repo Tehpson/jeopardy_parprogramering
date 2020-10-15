@@ -12,9 +12,6 @@ namespace jeopardy_par_programering
     class questions
     {
         /* 
-         
-
-
         How to use:
             In the beggning call SetUpData:
                 * this will add all date from all the sesons in to a data file that we can call
@@ -26,7 +23,6 @@ namespace jeopardy_par_programering
                 * This will first clear all the questions in the List
                 * get 5 questions from each catigorie with value 600-1000
          */
-
         public static List<data> dataList = new List<data>();
         public static List<question_set> question_list = new List<question_set>();
 
@@ -196,19 +192,6 @@ namespace jeopardy_par_programering
                 }
                 stopwatch.Reset();
 
-                //there do exist data where to value is 0 in the dataset...
-                if(validQuestions.Count == 0)
-                {
-                    foreach (var data in dataList)
-                    {
-                        if (data.category == catagory && data.value == 0)
-                        {
-                            // add i where i becmes the id for each row fo data
-                            validQuestions.Add(i);
-                        }
-                        i++;
-                    }
-                }
                 id.Add(validQuestions[rnd.Next(validQuestions.Count)]);
                 validQuestions.Clear();
             }
