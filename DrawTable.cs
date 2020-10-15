@@ -271,17 +271,17 @@ namespace jeopardy_par_programering
                         if (activeAnswerCuror == 0)
                         {
                             Console.SetCursorPosition(Console.WindowWidth / 4 * 2 - 5, Console.WindowHeight - 10);
-                            Console.Write(">   YES");
-                            Console.SetCursorPosition(Console.WindowWidth / 4 * 3 - 1, Console.WindowHeight - 10);
-                            Console.Write("NO");
+                            Console.Write(">");
                         }
+                        Console.SetCursorPosition(Console.WindowWidth / 4 * 2 -1, Console.WindowHeight - 10);
+                        Console.Write("YES");
                         if (activeAnswerCuror == 1)
                         {
-                            Console.SetCursorPosition(Console.WindowWidth / 4 * 2 - 1, Console.WindowHeight - 10);
-                            Console.Write("YES");
                             Console.SetCursorPosition(Console.WindowWidth / 4 * 3 - 5, Console.WindowHeight - 10);
-                            Console.Write(">   NO");
+                            Console.Write(">");
                         }
+                        Console.SetCursorPosition(Console.WindowWidth / 4 * 3 -1, Console.WindowHeight - 10);
+                        Console.Write("NO");
 
 
                         break;
