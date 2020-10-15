@@ -1,44 +1,74 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-//namespace jeopardy_par_programering
-//{
-//    class game
-//    {
-//        //here do we but all the functions that make the game work like caclutating scores and so on.
+namespace jeopardy_par_programering
+{
+    class game
+    {
+
+
+        //        //here do we but all the functions that make the game work like caclutating scores and so on.
 
         /*      TODO:
          *      make score funtioction
          *      make a function that enters all the users (thinking that ppl can enter players name in the beggingin) kinda like List<data>
          *      ...
          */
-         /*public static PlayerList()
+
+        //Börjat jobba med score function,
+        string[,] categories_points = new string[5, 5]
         {
-            //put platerlist as a public static list outide of teh function så we can ccses it evrywhere and 
-            //use playerlist.add({}) instead to add content to the list
-            /*List<Player> playerList = new List<Player>(Name = "Philip", Points = 500)
+            {" $100  ", "  $100  ", "  $100  ", "  $100  ", "  $100  " },
+            {" $200  ", "  $200  ", "  $200  ", "  $200  ", "  $200  " },
+            {" $300  ", "  $300  ", "  $300  ", "  $300  ", "  $300  " },
+            {" $400  ", "  $400  ", "  $400  ", "  $400  ", "  $400  " },
+            {" $500  ", "  $500  ", "  $500  ", "  $500  ", "  $500  " }
+        };
+        string[] categories = new string[] { };//get categories from tsv file
+        int category = 0;
+
+        public static List<string> PlayerName(string name)
+        {
+            // List<string> PlayerList = new List<string>();
+            //PlayerList.AddRange(name);
+            //return PlayerList;//hur ger man bäst ett return value på detta?
+            
+            var listName = new List<string>();
+            
+            string playerName = "Philip";
+
+            listName.Add(playerName);
+
+            foreach (var item in listName)
             {
-                new Player() {}
-            };
-            playerList.Sort(ComparePlayers);
-            foreach (player player in playerList)
-                Console.WriteLine(player.Name + ": " + player.Points + " points!");
+                Console.WriteLine(item);
+            }
+
+            return listName;
         }
+        //Tänker en function som man kan kalla på för att se och jämföra poängen mellan de tävlande
+        //Typ som detta?
+        public static int ComparePlayers(Player Name)
 
-
-        public static int ComparePlayers(Player player1, Player player2, Player player3)
+        
+       /* public static List<data> ComparePlayers(Player listName, Player player2, Player player3, Player player4)
         {
-            return player1.Points.CompareTo(player2.Points, player3.Points);
+            while(playerList.Count < 5)
+            foreach (var data in playerList)
+                Console.WriteLine(player.Name + ": " + player.Points + " points!");
+            return ;
         }*/
+        //put platerlist as a public static list outide of teh function så we can ccses it evrywhere and 
+        //use playerlist.add({}) instead to add content to the list
+    }
+    public class Player
+    {
+        public string Name { get; set; }
+        public int Points { get; set; }
 
-//    //most Lay outside the class game coz it is a class of its own
-//    public class Player
-//    {
-//        public string Name { get; set; }
-//        public int Points { get; set; }
-//    }
+    }
+}
 
-//}
 
 
