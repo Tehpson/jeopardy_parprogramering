@@ -7,9 +7,7 @@ namespace jeopardy_par_programering
     {
         /*
          TODO:
-            *create endscrenn
-            *create round 2 compability.
-            
+            *create endscrenn / assignd Philip
          */
         //diffreant stages of game
         private enum Stage
@@ -18,8 +16,10 @@ namespace jeopardy_par_programering
             PlayerCount,
             PlayerName,
             Board,
+            RoundTwoScreen,
             Answer,
             Question,
+            Endscreen,
         }
         //where cureses is
         private static readonly int[] activebord = { 0, 1 };
@@ -27,6 +27,9 @@ namespace jeopardy_par_programering
         private static int activeAnswerCuror = 0;
         private static int qestionID;
         private static string fastestPlayerName = "";
+        private static int round = 1;
+        private static int questionsLeft = 1;
+
         //lsit of the playername that we send to game.cs
         private static readonly List<string> players = new List<string>();
         public static void draw()
@@ -133,6 +136,7 @@ namespace jeopardy_par_programering
 
 
 
+
                     //draw the game board
                     case Stage.Board:
                         //write out what buton to play.
@@ -199,11 +203,15 @@ namespace jeopardy_par_programering
                                         break;
                                 }
                                 //if value is bettwen 600 and 1000 just reduce by 500 to get the rigth vlau. (in round two do the opesist)
-                                if (value > 500)
+                                if (value > 500 && round == 1)
                                 {
                                     value = value - 500;
                                 }
-                                //if curser is on teh current question add > before it
+                                if (value < 500 && value != 0 && round == 2)
+                                {
+                                    value = value + 500;
+                                }
+                                //if curser is on the current question add > before it
                                 if (activebord[0] == i && activebord[1] == y)
                                 {
                                     Console.SetCursorPosition(pointcolum - 4, Console.WindowHeight / 8 * (y + 1));
@@ -371,7 +379,32 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition(0, Console.WindowHeight);
                         break;
 
-                }   
+                    case Stage.RoundTwoScreen:
+                        Console.Clear();
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 5); Console.Write(@"  _____                       _   _________          ______  ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 6); Console.Write(@" |  __ \                     | | |__   __\ \        / / __ \ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 7); Console.Write(@" | |__) |___  _   _ _ __   __| |    | |   \ \  /\  / / |  | |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 8); Console.Write(@" |  _  // _ \| | | | '_ \ / _` |    | |    \ \/  \/ /| |  | |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 9); Console.Write(@" | | \ \ (_) | |_| | | | | (_| |    | |     \  /\  / | |__| |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@" |_|  \_\___/ \__,_|_| |_|\__,_|    |_|      \/  \/   \____/ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                             ");
+
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 5, Console.WindowHeight - 10); Console.WriteLine(">  Start");
+
+
+                        break;
+
+                }
+
+
+
+
+
+
+
+
+
+
 
 
                 //logic
@@ -474,18 +507,20 @@ namespace jeopardy_par_programering
                                 if (!questions.dataList[qestionID].done)
                                 {
                                     state = Stage.Question;
-                                    questions.dataList[qestionID].done = true;
                                 }
-                                break;
-
-                            default:
                                 break;
                         }
 
                         break;
 
                     case Stage.Question:
-                        state = Stage.Answer;
+                        questions.dataList[qestionID].done = true;
+                        questionsLeft--;
+                        if (questionsLeft == 0)
+                        {
+                            state = Stage.RoundTwoScreen;
+                        }else
+                            state = Stage.Answer;
                         break;
 
 
@@ -517,9 +552,20 @@ namespace jeopardy_par_programering
                                     wasAnswerRigth = true;
                                 }
 
-                                gameLogic.addScore(fastestPlayerName, questions.dataList[qestionID].value, wasAnswerRigth);
+                                gameLogic.AddScore(fastestPlayerName, questions.dataList[qestionID].value, wasAnswerRigth);
                                 state = Stage.Board;
                                 break;
+                        }
+                        break;
+                    case Stage.RoundTwoScreen:
+                        questionsLeft = 30;
+                        round = 2;
+
+                        questions.fillQuestionList();
+                        var _ = Console.ReadKey().Key;
+                        if(_ == ConsoleKey.Enter)
+                        {
+                            state = Stage.Board;
                         }
                         break;
                 }

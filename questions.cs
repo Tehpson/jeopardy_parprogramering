@@ -24,7 +24,7 @@ namespace jeopardy_par_programering
 
 
         public static bool setUpData()
-        {
+            {
 
             bool sucseed;
 
@@ -54,6 +54,7 @@ namespace jeopardy_par_programering
                         dataList.Add(new data
                         {
                             value = int.Parse(row[1]),
+                            category = row[3],
                             answer = row[5],
                             question = row[6],
                             done = false
@@ -61,7 +62,7 @@ namespace jeopardy_par_programering
                     }
                 }
 
-                fillQuestionList(1);
+                fillQuestionList();
 
                 sucseed = true;
             }
@@ -74,11 +75,11 @@ namespace jeopardy_par_programering
         }
 
 
-        public static void fillQuestionList(int round)
+        public static void fillQuestionList()
         {
             //get 6 rendom catigorys
             question_list.Clear();
-            List<string> sixcat = getSixCategories(round);
+            List<string> sixcat = getSixCategories();
 
             //for each catigory get 5 questions with the correct value and add to List<question_set>
             foreach (string cat in sixcat)
@@ -103,7 +104,7 @@ namespace jeopardy_par_programering
         }
 
 
-        public static List<string> getSixCategories(int round)
+        public static List<string> getSixCategories()
         {
             Random rnd = new Random();
             List<string> sixcat = new List<string>();
@@ -205,7 +206,6 @@ namespace jeopardy_par_programering
     internal class data
     {
         public int value { get; set; }
-        public string daily_double { get; set; }
         public string category { get; set; }
         public string answer { get; set; }
         public string question { get; set; }
