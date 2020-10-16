@@ -31,19 +31,7 @@ namespace jeopardy_par_programering
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
-        public static void addPlayerScore(string name, int value, bool answer)
-        {
-            if (answer)
-            {
-                foreach (var player in players)
-                {
-                    if (player.Name == name)
-                    {
-                        player.Points = +value;
-                    }
-                }
-            }
-        }
+       
         public static void AddScore(string fastestPlayerName, int value, bool wasAnswerRigth)
         {
             if (wasAnswerRight)
