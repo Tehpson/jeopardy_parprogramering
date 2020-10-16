@@ -61,8 +61,9 @@ namespace jeopardy_par_programering
                             daily_double = row[2],
                             category = row[3],
                             answer = row[5],
-                            question = row[6]
-                        });
+                            question = row[6],
+                            done = false
+                        }) ;
                     }
                 }
 
@@ -210,6 +211,7 @@ namespace jeopardy_par_programering
         public string category { get; set; }
         public string answer { get; set; }
         public string question { get; set; }
+        public bool done { get; set; }
     }
 
     //to make a List<List<>> for question_list
