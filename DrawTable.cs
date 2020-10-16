@@ -379,7 +379,7 @@ namespace jeopardy_par_programering
                         //if all playername have been put in go to the game board
                     case Stage.PlayerName:
                         state = Stage.Board;
-                        gameLogic.addPlayers(players);
+                        gameLogic.AddPlayers(players);
                         break;
 
 
