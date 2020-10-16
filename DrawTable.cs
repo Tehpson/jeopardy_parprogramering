@@ -337,11 +337,6 @@ namespace jeopardy_par_programering
                         break;
 
                 }
-
-
-                //logic
-
-                
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace jeopardy_par_programering
@@ -30,11 +31,22 @@ namespace jeopardy_par_programering
          *      Funtion that add or subtract score from the player
          */
         //idk tror inte vi beöhver detta då jag sickar till dig spelare och value och ifall det var rätt eller fel.  gör istället en void function som tar in stirng Name, int Value, bool answer
-        
+
         // här gör att du ahr imot en lista med namn istället, och sedan för List.count loppar du till du har laggt in alla 
         //gör ändast void functioner då ci inte kommer behlva få tillbaka någon data när vi kllar på dem.
 
-        /*public static void AddPlayers(List<string> playername)
+        public static void ScoreCalculator()
+        {
+            /*points = int.TryParse();
+            ScoreCalculator.Add(points)
+            for (int i = 0; i<score.Count; i++)
+            {
+                totalScore += score[i];
+            }*/
+            int[] pointTable = new int[5] { 100, 200, 300, 400, 500 };
+        }
+        
+    public static void AddPlayers(List<string> playername)
         {
             foreach (var player in playername)
             {
@@ -42,7 +54,7 @@ namespace jeopardy_par_programering
                 players.Add(new Player { Name = player, Points = 0 });
             }
         }
-    }*/
+    
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
 
