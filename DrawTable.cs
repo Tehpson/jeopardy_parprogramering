@@ -9,7 +9,6 @@ namespace jeopardy_par_programering
          TODO:
             *create endscrenn
             *create round 2 compability.
-            *add backspace when typing in name.
             
          */
         //diffreant stages of game
