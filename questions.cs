@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
 
 namespace jeopardy_par_programering
 {
-    class questions
+    internal class questions
     {
         /* 
         How to use:
@@ -29,7 +25,7 @@ namespace jeopardy_par_programering
 
         public static bool setUpData()
         {
-            
+
             bool sucseed;
 
             //get the path to the rigth diractery
@@ -39,7 +35,7 @@ namespace jeopardy_par_programering
             path = Path.Combine(projectDirectory, "jeopardy_clue_dataset");
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
-            
+
             try
             {
                 //for each file in teh diractoy that ends in TSV get the data and add it to the dataList.
@@ -58,12 +54,10 @@ namespace jeopardy_par_programering
                         dataList.Add(new data
                         {
                             value = int.Parse(row[1]),
-                            daily_double = row[2],
-                            category = row[3],
                             answer = row[5],
                             question = row[6],
                             done = false
-                        }) ;
+                        });
                     }
                 }
 
@@ -78,7 +72,7 @@ namespace jeopardy_par_programering
 
             return sucseed;
         }
-            
+
 
         public static void fillQuestionList(int round)
         {
@@ -135,7 +129,7 @@ namespace jeopardy_par_programering
                     bool excist = false;
                     int i = 0;
                     //while category don't extist and we haven't lookd at all categry in out 6 once if it colide cheack else go past
-                    while(i < sixcat.Count && !excist)
+                    while (i < sixcat.Count && !excist)
                     {
                         if (sixcat[i] == dataList[RendomValue].category)
                         {
@@ -147,7 +141,7 @@ namespace jeopardy_par_programering
                     {
                         sixcat.Add(dataList[RendomValue].category);
                     }
-                    
+
                 }
 
                 //for debug jsut write out the 6 cat
@@ -179,12 +173,16 @@ namespace jeopardy_par_programering
             {
                 int i = 0;
                 stopwatch.Start();
-                foreach(var data in dataList)
+                foreach (data data in dataList)
                 {
                     //If the time sence started looking thorw data is over 5 seconds and we already have atleast 
                     //one qusetion just continue instead of kep searching like a timeout.
-                    if (stopwatch.Elapsed.Seconds > 5 && validQuestions.Count > 1) break;
-                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100)|| data.value == (((id.Count + 1) * 100) + 500)))
+                    if (stopwatch.Elapsed.Seconds > 5 && validQuestions.Count > 1)
+                    {
+                        break;
+                    }
+
+                    if (data.category == catagory && (data.value == ((id.Count + 1) * 100) || data.value == (((id.Count + 1) * 100) + 500)))
                     {
                         // add i where i becmes the id for each row fo data
                         validQuestions.Add(i);
@@ -204,7 +202,7 @@ namespace jeopardy_par_programering
 
 
     //to make a List<List<>> for Data_list
-    class data
+    internal class data
     {
         public int value { get; set; }
         public string daily_double { get; set; }
@@ -215,7 +213,7 @@ namespace jeopardy_par_programering
     }
 
     //to make a List<List<>> for question_list
-    class question_set
+    internal class question_set
     {
         public string category { get; set; }
         public int question1ID { get; set; }
