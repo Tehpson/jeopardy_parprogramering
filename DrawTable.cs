@@ -157,59 +157,19 @@ namespace jeopardy_par_programering
                                 switch (y)
                                 {
                                     case 1:
-                                        if (!questions.dataList[questions.question_list[i].question1ID].done)
-                                        {
-
-                                            value = questions.dataList[questions.question_list[i].question1ID].value;
-                                        }
-                                        else
-                                        {
-                                            value = 0;
-                                        }
+                                        value = questions.dataList[questions.question_list[i].question1ID].value;
                                         break;
                                     case 2:
-                                        if (!questions.dataList[questions.question_list[i].question2ID].done)
-                                        {
-
-                                            value = questions.dataList[questions.question_list[i].question2ID].value;
-                                        }
-                                        else
-                                        {
-                                            value = 0;
-                                        }
+                                        value = questions.dataList[questions.question_list[i].question2ID].value;
                                         break;
                                     case 3:
-                                        if (!questions.dataList[questions.question_list[i].question3ID].done)
-                                        {
-
-                                            value = questions.dataList[questions.question_list[i].question3ID].value;
-                                        }
-                                        else
-                                        {
-                                            value = 0;
-                                        }
+                                        value = questions.dataList[questions.question_list[i].question3ID].value;
                                         break;
                                     case 4:
-                                        if (!questions.dataList[questions.question_list[i].question4ID].done)
-                                        {
-
-                                            value = questions.dataList[questions.question_list[i].question4ID].value;
-                                        }
-                                        else
-                                        {
-                                            value = 0;
-                                        }
+                                        value = questions.dataList[questions.question_list[i].question4ID].value;
                                         break;
                                     case 5:
-                                        if (!questions.dataList[questions.question_list[i].question5ID].done)
-                                        {
-
-                                            value = questions.dataList[questions.question_list[i].question5ID].value;
-                                        }
-                                        else
-                                        {
-                                            value = 0;
-                                        }
+                                        value = questions.dataList[questions.question_list[i].question5ID].value;
                                         break;
                                 }
                                 //if value is bettwen 600 and 1000 just reduce by 500 to get the rigth vlau. (in round two do the opesist)
@@ -221,11 +181,7 @@ namespace jeopardy_par_programering
                                     Console.Write(" >  ");
                                 }
                                 Console.SetCursorPosition(pointcolum, Console.WindowHeight / 8 * (y + 1));
-                                //if the question is already answered disaply empty
-                                if (value != 0)
-                                {
-                                    Console.Write(value);
-                                }
+                                Console.Write(value);
 
                             }
 
@@ -348,8 +304,6 @@ namespace jeopardy_par_programering
                                     break;
                             }
                         }
-                        //to set teh cursour out fo the way
-                        Console.SetCursorPosition(0, Console.WindowHeight - 1);
                         //make sure that even if palyers press a lot of buttons after the first one it dosnt skip evrything
                         Console.WriteLine("press Enter to Continue");
                         _ = Console.ReadLine();
@@ -386,6 +340,7 @@ namespace jeopardy_par_programering
 
 
                 //logic
+
 
                 switch (state)
                 {
