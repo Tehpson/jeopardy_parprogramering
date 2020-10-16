@@ -472,7 +472,7 @@ namespace jeopardy_par_programering
                                     wasAnswerRigth = false; 
                                 else wasAnswerRigth = true;
 
-                                gameLogic.addScore(fastestPlayerName, questions.dataList[qestionID].value, wasAnswerRigth);
+                                gameLogic.AddScore(fastestPlayerName, questions.dataList[qestionID].value, wasAnswerRigth);
                                 state = Stage.Board;
                                 break;
                         }
