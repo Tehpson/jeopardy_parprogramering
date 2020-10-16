@@ -8,6 +8,7 @@ namespace jeopardy_par_programering
     class gameLogic
     {
         public static List<Player> players = new List<Player>();
+        private static bool wasAnswerRight;
 
 
         /*      TODO:
@@ -19,19 +20,8 @@ namespace jeopardy_par_programering
         // här gör att du ahr imot en lista med namn istället, och sedan för List.count loppar du till du har laggt in alla 
         //gör ändast void functioner då ci inte kommer behlva få tillbaka någon data när vi kllar på dem.
 
-        public static void ScoreCalculator()
-        {
-            /*points = int.TryParse();
-            ScoreCalculator.Add(points)
-            for (int i = 0; i<score.Count; i++)
-            {
-                totalScore += score[i];
-            }*/
-            int[] pointTable = new int[5] { 100, 200, 300, 400, 500 };
-        }
-        
-    public static void AddPlayers(List<string> playername)
-        public static void AddPlayers(List<string> playername)
+
+        public static void AddPlayers(List<string> playername) 
         {
             foreach (var player in playername)
             {
@@ -41,14 +31,34 @@ namespace jeopardy_par_programering
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
-
-        //bara added denna du löser vad den gör
-        internal static void addScore(string fastestPlayerName, int value, bool wasAnswerRigth)
+        public static void addPlayerScore(string name, int value, bool answer)
         {
-            
+            if (answer)
+            {
+                foreach (var player in players)
+                {
+                    if (player.Name == name)
+                    {
+                        player.Points = +value;
+                    }
+                }
+            }
+        }
+        public static void AddScore(string fastestPlayerName, int value, bool wasAnswerRigth)
+        {
+            if (wasAnswerRight)
+            {
+                foreach (var player in players)
+                {
+                    if (player.Name == fastestPlayerName)
+                    {
+                        player.Points = + value;
+                    }
+                }
+            }
         }
 
-        
+
 
         /* public static List<data> ComparePlayers(Player listName, Player player2, Player player3, Player player4)
          {
