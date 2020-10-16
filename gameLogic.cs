@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace jeopardy_par_programering
@@ -7,6 +8,7 @@ namespace jeopardy_par_programering
     class gameLogic
     {
         public static List<Player> players = new List<Player>();
+        private static bool wasAnswerRight;
 
 
         /*      TODO:
@@ -14,11 +16,12 @@ namespace jeopardy_par_programering
          *      Funtion that add or subtract score from the player
          */
         //idk tror inte vi beöhver detta då jag sickar till dig spelare och value och ifall det var rätt eller fel.  gör istället en void function som tar in stirng Name, int Value, bool answer
-        
+
         // här gör att du ahr imot en lista med namn istället, och sedan för List.count loppar du till du har laggt in alla 
         //gör ändast void functioner då ci inte kommer behlva få tillbaka någon data när vi kllar på dem.
 
-        public static void AddPlayers(List<string> playername)
+
+        public static void AddPlayers(List<string> playername) 
         {
             foreach (var player in playername)
             {
@@ -28,14 +31,22 @@ namespace jeopardy_par_programering
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
-
-        //bara added denna du löser vad den gör
-        internal static void addScore(string fastestPlayerName, int value, bool wasAnswerRigth)
+       
+        public static void AddScore(string fastestPlayerName, int value, bool wasAnswerRigth)
         {
-            
+            if (wasAnswerRight)
+            {
+                foreach (var player in players)
+                {
+                    if (player.Name == fastestPlayerName)
+                    {
+                        player.Points = + value;
+                    }
+                }
+            }
         }
 
-        
+
 
         /* public static List<data> ComparePlayers(Player listName, Player player2, Player player3, Player player4)
          {

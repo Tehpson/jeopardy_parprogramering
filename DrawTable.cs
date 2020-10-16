@@ -371,7 +371,7 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition(0, Console.WindowHeight);
                         break;
 
-                }
+                }   
 
 
                 //logic
