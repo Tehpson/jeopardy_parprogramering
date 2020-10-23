@@ -53,9 +53,10 @@ namespace jeopardy_par_programering
                     players.Add(new Points(splitentry[0], int.Parse(splitentry[1]));
                 }
             }*/
-            var topPlayers = players.Max(Name => Name.Points);
+            int topPlayers = players.Max(Name => Name.Points);
 
-            return topPlayers;
+            var player = 
+            return topPlayers.ToString();
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
