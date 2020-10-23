@@ -404,7 +404,9 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@"   |_|  |_| |_|\___|   \_/\_/ |_|_| |_|_| |_|\___|_|    |_|___/");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                ");                                                             ");
 
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogic.TheWinner.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogic.TheWinner());
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogics.TheWinner.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogics.TheWinner());
+
+
 
                         break;
 
@@ -532,7 +534,9 @@ namespace jeopardy_par_programering
                         questionsLeft--;
                         if (questionsLeft == 0)
                         {
-                            state = Stage.RoundTwoScreen;
+                            if (round == 1)
+                                state = Stage.RoundTwoScreen;
+                            else state = Stage.Endscreen;
                         }else
                             state = Stage.Answer;
                         break;
@@ -583,16 +587,7 @@ namespace jeopardy_par_programering
                         }
                         break;
 
-                    case Stage.Endscreen:
-
-                        bool end = true;
-                        while (end)
-                        {
-                            Console.WriteLine("\r" + gameLogic.TheWinner());
-                            Console.ReadLine();
-                        }
-                        if(Console.ReadLine()=)
-                        break;
+              
 
                 }
             }
