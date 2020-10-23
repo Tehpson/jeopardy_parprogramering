@@ -5,10 +5,6 @@ namespace jeopardy_par_programering
 {
     internal class DrawTable
     {
-        /*
-         TODO:
-            *create endscrenn / assignd Philip
-         */
         //diffreant stages of game
         private enum Stage
         {
@@ -27,8 +23,8 @@ namespace jeopardy_par_programering
         private static int activeAnswerCuror = 0;
         private static int qestionID;
         private static string fastestPlayerName = "";
-        private static int round = 2;
-        private static int questionsLeft = 1;
+        private static int round = 1;
+        private static int questionsLeft = 30;
 
         //lsit of the playername that we send to game.cs
         private static readonly List<string> players = new List<string>();
