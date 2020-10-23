@@ -41,21 +41,19 @@ namespace jeopardy_par_programering
             }
         }
         //Todo function som kollar vem som vunnit, högst poäng, kopplad till endscreen(stage finns i drawTable)
-        public static string TheWinner()
+        public static List<Player> TheWinner()
         {
-            /*foreach (string entry in splitscores)
+            List<Player> winner = new List<Player>();
+            int highestScore = players.Max(Name => Name.Points);
+            foreach (var item in players)
             {
-                string replace = entry.Replace("[", "").Replace("]", "");
-                string[] splitentry = replace.Split('-');
-
-                if (splitentry.Count() > 1)
+                if (item.Points == highestScore)
                 {
-                    players.Add(new Points(splitentry[0], int.Parse(splitentry[1]));
+                    winner.Add(new Player { Name = item.Name, Points = item.Points });
                 }
-            }*/
-            var topPlayers = players.Max(Name => Name.Points);
+            }
 
-            return topPlayers;
+            return winner;
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }
