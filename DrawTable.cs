@@ -5,10 +5,6 @@ namespace jeopardy_par_programering
 {
     internal class DrawTable
     {
-        /*
-         TODO:
-            *create endscrenn / assignd Philip
-         */
         //diffreant stages of game
         private enum Stage
         {
