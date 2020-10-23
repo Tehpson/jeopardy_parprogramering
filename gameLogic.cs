@@ -41,7 +41,7 @@ namespace jeopardy_par_programering
             }
         }
         //Todo function som kollar vem som vunnit, högst poäng, kopplad till endscreen(stage finns i drawTable)
-        public static string TheWinner(Player Name, Player Points)
+        public static string TheWinner()
         {
             /*foreach (string entry in splitscores)
             {
@@ -55,7 +55,7 @@ namespace jeopardy_par_programering
             }*/
             var topPlayers = players.Max(Name => Name.Points);
 
-            return;
+            return topPlayers;
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
         public static int ComparePlayers(Player Name) { return 0; }

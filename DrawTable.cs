@@ -394,6 +394,20 @@ namespace jeopardy_par_programering
 
                         break;
 
+                    case Stage.Endscreen:
+                        Console.Clear();
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 5); Console.Write(@"  _______ _                     _                         _     ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 6); Console.Write(@" |__   __| |                   (_)                       (_)    ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 7); Console.Write(@"    | |  | |__   ___  __      ___ _ __  _ __   ___ _ __   _ ___ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 8); Console.Write(@"    | |  | '_ \ / _ \ \ \ /\ / / | '_ \| '_ \ / _ \ '__| | / __|");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 9); Console.Write(@"    | |  | | | |  __/  \ V  V /| | | | | | | |  __/ |    | \__ \");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@"   |_|  |_| |_|\___|   \_/\_/ |_|_| |_|_| |_|\___|_|    |_|___/");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                ");                                                             ");
+
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogics.TheWinner.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogics.TheWinner());
+
+                        break;
+
                 }
 
 
@@ -568,6 +582,18 @@ namespace jeopardy_par_programering
                             state = Stage.Board;
                         }
                         break;
+
+                    case Stage.Endscreen:
+
+                        bool end = true;
+                        while (end)
+                        {
+                            Console.WriteLine("\r" + gameLogic.TheWinner());
+                            Console.ReadLine();
+                        }
+                        if(Console.ReadLine()=)
+                        break;
+
                 }
             }
         }
