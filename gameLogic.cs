@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 
 namespace jeopardy_par_programering
 {
     class gameLogic
     {
         public static List<Player> players = new List<Player>();
-        public static void AddPlayers(List<string> playername) 
+        public static void AddPlayers(List<string> playername)
         {
             foreach (var player in playername)
-            { 
+            {
                 players.Add(new Player { Name = player, Points = 0 });
             }
         }

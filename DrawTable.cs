@@ -120,7 +120,7 @@ namespace jeopardy_par_programering
                                     name = name + localinput.Key;
 
                                 }
-                                else if(localinput.Key == ConsoleKey.Backspace)
+                                else if (localinput.Key == ConsoleKey.Backspace)
                                 {
                                     name = name.Remove(name.Length - 1, 1);
                                 }
@@ -395,7 +395,7 @@ namespace jeopardy_par_programering
                         break;
 
                     case Stage.Endscreen:
-                        
+
                         Console.Clear();
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 5); Console.Write(@"  _______ _                     _                         _     ");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 6); Console.Write(@" |__   __| |                   (_)                       (_)    ");
@@ -403,7 +403,7 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 8); Console.Write(@"    | |  | '_ \ / _ \ \ \ /\ / / | '_ \| '_ \ / _ \ '__| | / __|");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 9); Console.Write(@"    | |  | | | |  __/  \ V  V /| | | | | | | |  __/ |    | \__ \");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@"   |_|  |_| |_|\___|   \_/\_/ |_|_| |_|_| |_|\___|_|    |_|___/");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                "); 
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                ");
 
                         Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogic.TheWinner()[0].Name.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogic.TheWinner()[0].Name);
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 2, Console.WindowHeight - 9); Console.WriteLine(gameLogic.TheWinner()[0].Points);
@@ -553,7 +553,7 @@ namespace jeopardy_par_programering
                     case Stage.Question:
                         questions.dataList[qestionID].done = true;
                         questionsLeft--;
-                            state = Stage.Answer;
+                        state = Stage.Answer;
                         break;
 
 
@@ -597,11 +597,19 @@ namespace jeopardy_par_programering
                                 if (questionsLeft == 0)
                                 {
                                     if (round == 1)
+                                    {
                                         state = Stage.RoundTwoScreen;
-                                    else state = Stage.Endscreen;
+                                    }
+                                    else
+                                    {
+                                        state = Stage.Endscreen;
+                                    }
                                 }
                                 else
+                                {
                                     state = Stage.Board;
+                                }
+
                                 break;
                         }
                         break;
@@ -611,13 +619,13 @@ namespace jeopardy_par_programering
 
                         questions.fillQuestionList();
                         var _ = Console.ReadKey().Key;
-                        if(_ == ConsoleKey.Enter)
+                        if (_ == ConsoleKey.Enter)
                         {
                             state = Stage.Board;
                         }
                         break;
 
-              
+
 
                 }
             }

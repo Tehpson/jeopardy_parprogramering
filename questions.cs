@@ -24,7 +24,7 @@ namespace jeopardy_par_programering
 
 
         public static bool setUpData()
-            {
+        {
 
             bool sucseed;
 
