@@ -13,7 +13,6 @@ namespace jeopardy_par_programering
 
             //This have to be the highest in teh file coz we want to do this before evrything else.
 
-            
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             Console.SetWindowPosition(0, 0);
             Console.WriteLine("Loading...");
@@ -25,6 +24,7 @@ namespace jeopardy_par_programering
                 Environment.Exit(0);
             }
 
+            //Game
             DrawTable.draw();
         }
     }

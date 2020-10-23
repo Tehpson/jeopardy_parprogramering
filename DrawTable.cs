@@ -404,7 +404,7 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@"   |_|  |_| |_|\___|   \_/\_/ |_|_| |_|_| |_|\___|_|    |_|___/");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                ");                                                             ");
 
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogics.TheWinner.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogics.TheWinner());
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogic.TheWinner.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogic.TheWinner());
 
                         break;
 
