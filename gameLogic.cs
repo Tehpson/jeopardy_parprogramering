@@ -59,7 +59,7 @@ namespace jeopardy_par_programering
             return topPlayers.ToString();
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
-        public static int ComparePlayers(Player Name) { return 0; }
+        public static int ComparePlayers(Player Name, Player Points) {return 0;}
     }
     public class Player
     {

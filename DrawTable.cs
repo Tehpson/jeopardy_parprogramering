@@ -401,11 +401,24 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 7); Console.Write(@"    | |  | |__   ___  __      ___ _ __  _ __   ___ _ __   _ ___ ");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 8); Console.Write(@"    | |  | '_ \ / _ \ \ \ /\ / / | '_ \| '_ \ / _ \ '__| | / __|");
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 9); Console.Write(@"    | |  | | | |  __/  \ V  V /| | | | | | | |  __/ |    | \__ \");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@"   |_|  |_| |_|\___|   \_/\_/ |_|_| |_|_| |_|\___|_|    |_|___/");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                ");                                                             ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@"    |_|  |_| |_|\___|   \_/\_/ |_|_| |_|_| |_|\___|_|    |_|___/");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                ");      
 
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 5, Console.WindowHeight - 10); Console.WriteLine(gameLogic.TheWinner());
 
+                        Console.ReadKey();
+                        Console.Clear();
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 5); Console.Write(@"   _____                    _                         _ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 6); Console.Write(@"  / ____|                  | |                       | |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 7); Console.Write(@" | (___   ___ ___  _ __ ___| |__   ___   __ _ _ __ __| |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 8); Console.Write(@"  \___ \ / __/ _ \| '__/ _ \ '_ \ / _ \ / _` | '__/ _` |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 9); Console.Write(@"  ____) | (_| (_) | | |  __/ |_) | (_) | (_| | | | (_| |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@" |_____/ \___\___/|_|  \___|_.__/ \___/ \__,_|_|  \__,_|");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                        ");
+
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 5, Console.WindowHeight - 10); Console.WriteLine(gameLogic.ComparePlayers(Player Name, Player Points));
+
+                        Console.ReadKey();
 
 
                         break;
