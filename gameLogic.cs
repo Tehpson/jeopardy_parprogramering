@@ -9,7 +9,6 @@ namespace jeopardy_par_programering
     class gameLogic
     {
         public static List<Player> players = new List<Player>();
-        private static bool wasAnswerRight;
         public static void AddPlayers(List<string> playername) 
         {
             foreach (var player in playername)
@@ -19,13 +18,13 @@ namespace jeopardy_par_programering
         }
         public static void AddScore(string fastestPlayerName, int value, bool wasAnswerRigth)
         {
-            if (wasAnswerRight)
+            if (wasAnswerRigth)
             {
                 foreach (var player in players)
                 {
                     if (player.Name == fastestPlayerName)
                     {
-                        player.Points = +value;
+                        player.Points += value;
                     }
                 }
             }
@@ -35,7 +34,7 @@ namespace jeopardy_par_programering
                 {
                     if (player.Name == fastestPlayerName)
                     {
-                        player.Points = -value;
+                        player.Points -= value;
                     }
                 }
             }
@@ -56,7 +55,12 @@ namespace jeopardy_par_programering
             return winner;
         }
         // humm kan vara bra i slutet där man kollar vem som van. 
-        public static int ComparePlayers(Player Name, Player Points) {return 0;}
+        public static List<Player> ComparePlayers()
+        {
+            List<Player> SortedList = players.OrderByDescending(o => o.Points).ToList();
+
+            return SortedList;
+        }
     }
     public class Player
     {

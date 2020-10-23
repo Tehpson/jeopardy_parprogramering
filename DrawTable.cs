@@ -27,7 +27,7 @@ namespace jeopardy_par_programering
         private static int activeAnswerCuror = 0;
         private static int qestionID;
         private static string fastestPlayerName = "";
-        private static int round = 1;
+        private static int round = 2;
         private static int questionsLeft = 1;
 
         //lsit of the playername that we send to game.cs
@@ -150,7 +150,7 @@ namespace jeopardy_par_programering
                         }
                         else if (gameLogic.players.Count == 4)
                         {
-                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z" + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z   " + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
                         }
                         //for each cat
                         for (int i = 0; i < 6; i++)
@@ -253,7 +253,7 @@ namespace jeopardy_par_programering
                         }
                         else if (gameLogic.players.Count == 4)
                         {
-                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z" + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
+                            Console.WriteLine(gameLogic.players[0].Name + " button is Q     " + gameLogic.players[1].Name + " button is Z   " + gameLogic.players[2].Name + " button is M     " + gameLogic.players[3].Name + " button is P     ");
                         }
 
 
@@ -406,19 +406,25 @@ namespace jeopardy_par_programering
                         Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                                "); 
 
                         Console.SetCursorPosition((Console.WindowWidth / 2) - gameLogic.TheWinner()[0].Name.Length / 2, Console.WindowHeight - 10); Console.WriteLine(gameLogic.TheWinner()[0].Name);
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 2, Console.WindowHeight - 10); Console.WriteLine(gameLogic.TheWinner()[0].Points);
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 2, Console.WindowHeight - 9); Console.WriteLine(gameLogic.TheWinner()[0].Points);
 
                         Console.ReadKey();
                         Console.Clear();
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 5); Console.Write(@"   _____                    _                         _ ");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 6); Console.Write(@"  / ____|                  | |                       | |");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 7); Console.Write(@" | (___   ___ ___  _ __ ___| |__   ___   __ _ _ __ __| |");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 8); Console.Write(@"  \___ \ / __/ _ \| '__/ _ \ '_ \ / _ \ / _` | '__/ _` |");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 9); Console.Write(@"  ____) | (_| (_) | | |  __/ |_) | (_) | (_| | | | (_| |");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 10); Console.Write(@" |_____/ \___\___/|_|  \___|_.__/ \___/ \__,_|_|  \__,_|");
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 11); Console.Write(@"                                                        ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 5); Console.Write(@"   _____                    _                         _ ");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 6); Console.Write(@"  / ____|                  | |                       | |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 7); Console.Write(@" | (___   ___ ___  _ __ ___| |__   ___   __ _ _ __ __| |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 8); Console.Write(@"  \___ \ / __/ _ \| '__/ _ \ '_ \ / _ \ / _` | '__/ _` |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 9); Console.Write(@"  ____) | (_| (_) | | |  __/ |_) | (_) | (_| | | | (_| |");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 10); Console.Write(@" |_____/ \___\___/|_|  \___|_.__/ \___/ \__,_|_|  \__,_|");
+                        Console.SetCursorPosition((Console.WindowWidth / 2) - 27, 11); Console.Write(@"                                                        ");
 
-                        Console.SetCursorPosition((Console.WindowWidth / 2) - 5, Console.WindowHeight - 10); Console.WriteLine(gameLogic.ComparePlayers(Player Name, Player Points));
+                        List<Player> scroebord = gameLogic.ComparePlayers();
+                        for (int i = 0; i < scroebord.Count; i++)
+                        {
+                            Console.SetCursorPosition((Console.WindowWidth / 2) - (scroebord[i].Name.Length + 8 / 2), Console.WindowHeight - 10 + i); Console.WriteLine(scroebord[i].Name + " with " + scroebord[i].Points);
+                        }
+
+
 
                         Console.ReadKey();
 
@@ -547,12 +553,6 @@ namespace jeopardy_par_programering
                     case Stage.Question:
                         questions.dataList[qestionID].done = true;
                         questionsLeft--;
-                        if (questionsLeft == 0)
-                        {
-                            if (round == 1)
-                                state = Stage.RoundTwoScreen;
-                            else state = Stage.Endscreen;
-                        }else
                             state = Stage.Answer;
                         break;
 
@@ -578,15 +578,30 @@ namespace jeopardy_par_programering
                                 bool wasAnswerRigth = false;
                                 if (activeAnswerCuror == 0)
                                 {
-                                    wasAnswerRigth = false;
+                                    wasAnswerRigth = true;
                                 }
                                 else
                                 {
-                                    wasAnswerRigth = true;
+                                    wasAnswerRigth = false;
                                 }
-
-                                gameLogic.AddScore(fastestPlayerName, questions.dataList[qestionID].value, wasAnswerRigth);
-                                state = Stage.Board;
+                                int value = questions.dataList[qestionID].value;
+                                if (value > 500 && round == 1)
+                                {
+                                    value = value - 500;
+                                }
+                                if (value < 500 && value != 0 && round == 2)
+                                {
+                                    value = value + 500;
+                                }
+                                gameLogic.AddScore(fastestPlayerName, value, wasAnswerRigth);
+                                if (questionsLeft == 0)
+                                {
+                                    if (round == 1)
+                                        state = Stage.RoundTwoScreen;
+                                    else state = Stage.Endscreen;
+                                }
+                                else
+                                    state = Stage.Board;
                                 break;
                         }
                         break;
